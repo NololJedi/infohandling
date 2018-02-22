@@ -32,21 +32,6 @@ public class LexemeParser implements Parser {
         TextComposite lexeme = new TextComposite();
         lexeme.setComponentType(ComponentType.LEXEME);
 
-        content = content.trim();
-
-        setNextParser(SymbolParser.getInstance());
-        lexeme.addTextComponent(nextParser.parseTextComponent(LEXEME_IDENTIFIER));
-
-        String[] parsedContent = content.split(LEXEME_IDENTIFIER);
-        for (int arrayIndex = 0; arrayIndex < parsedContent.length; arrayIndex++) {
-            setNextParser(WordParser.getInstance());
-            String currentContent = parsedContent[arrayIndex];
-            TextComponent currentComponent = nextParser.parseTextComponent(currentContent);
-            lexeme.addTextComponent(currentComponent);
-
-            setNextParser(SymbolParser.getInstance());
-
-        }
 
         return lexeme;
     }

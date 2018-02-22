@@ -4,4 +4,5 @@ public interface TextComponent {
 
     String getContent();
     ComponentType getComponentType();
+
 }

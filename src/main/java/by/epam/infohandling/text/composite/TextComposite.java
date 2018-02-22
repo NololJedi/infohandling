@@ -2,6 +2,7 @@ package by.epam.infohandling.text.composite;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TextComposite implements TextComponent {
 
@@ -48,6 +49,24 @@ public class TextComposite implements TextComponent {
         }
     }
 
+    public void setComponentType(ComponentType componentType) {
+        if (componentType == null) {
+            throw new IllegalArgumentException("Incorrect input component type.");
+        }
+
+        this.componentType = componentType;
+    }
+
+    public List<TextComponent> getTextComponents() {
+        return textComponents;
+    }
+
+    @Override
+    public ComponentType getComponentType() {
+        return this.componentType;
+    }
+
+    @Override
     public String getContent() {
         if (this.textComponents.size() != 0) {
             StringBuilder result = new StringBuilder();
@@ -61,15 +80,29 @@ public class TextComposite implements TextComponent {
         }
     }
 
-    public void setComponentType(ComponentType componentType) {
-        if (componentType == null) {
-            throw new IllegalArgumentException("Incorrect input component type.");
+    @Override
+    public boolean equals(Object object) {
+        if (this == object){
+            return true;
         }
-
-        this.componentType = componentType;
+        if (object == null || getClass() != object.getClass()){
+            return false;
+        }
+        TextComposite that = (TextComposite) object;
+        return Objects.equals(textComponents, that.textComponents) &&
+                componentType == that.componentType;
     }
 
-    public ComponentType getComponentType() {
-        return this.componentType;
+    @Override
+    public int hashCode() {
+        return Objects.hash(textComponents, componentType);
+    }
+
+    @Override
+    public String toString() {
+        return "TextComposite{" +
+                "textComponents=" + textComponents +
+                ", componentType=" + componentType +
+                '}';
     }
 }

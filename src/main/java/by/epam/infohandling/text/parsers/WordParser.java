@@ -1,8 +1,8 @@
 package by.epam.infohandling.text.parsers;
 
-import by.epam.infohandling.text.composite.ComponentType;
-import by.epam.infohandling.text.composite.TextComponent;
-import by.epam.infohandling.text.composite.TextComposite;
+import by.epam.infohandling.text.composite.*;
+
+import static by.epam.infohandling.text.parsers.SymbolParser.SYMBOL_LENGTH;
 
 public class WordParser implements Parser {
 
@@ -23,14 +23,26 @@ public class WordParser implements Parser {
         if (content == null || content.isEmpty()){
             throw new IllegalArgumentException("Incorrect content.");
         }
-
-        char[] contentSymbols = content.toCharArray();
         Parser parser = SymbolParser.getInstance();
         TextComposite word = new TextComposite();
         word.setComponentType(ComponentType.WORD);
 
-        for (int arrayIndex = 0; arrayIndex < contentSymbols.length; arrayIndex++) {
-            String currentContent = String.valueOf(contentSymbols[arrayIndex]);
+        if (content.length() == SYMBOL_LENGTH){
+            Symbol symbol = (Symbol) parser.parseTextComponent(content);
+
+            if (symbol.getSymbolType() == SymbolType.ALPHABET){
+                word.addTextComponent(symbol);
+
+                return word;
+            } else {
+
+                return symbol;
+            }
+        }
+
+        char[] contentSymbols = content.toCharArray();
+        for (char contentSymbol : contentSymbols) {
+            String currentContent = String.valueOf(contentSymbol);
             TextComponent component = parser.parseTextComponent(currentContent);
 
             word.addTextComponent(component);
