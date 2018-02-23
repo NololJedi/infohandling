@@ -29,7 +29,7 @@ public class Symbol implements TextComponent {
     }
 
     public void setSymbolType(SymbolType symbolType) {
-        if (symbolType == null){
+        if (symbolType == null) {
             throw new IllegalArgumentException("Incorrect symbol type detected.");
         }
 
@@ -38,10 +38,10 @@ public class Symbol implements TextComponent {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object){
+        if (this == object) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()){
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
         Symbol symbol = (Symbol) object;

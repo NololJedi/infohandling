@@ -82,10 +82,10 @@ public class TextComposite implements TextComponent {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object){
+        if (this == object) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()){
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
         TextComposite that = (TextComposite) object;

@@ -2,16 +2,17 @@ package by.epam.infohandling.text.parsers;
 
 import by.epam.infohandling.text.composite.*;
 
-import static by.epam.infohandling.text.parsers.SymbolParser.SYMBOL_LENGTH;
+import static by.epam.infohandling.text.parsers.ContentMatcher.SYMBOL_LENGTH;
 
 public class WordParser implements Parser {
 
     private static WordParser wordParser = null;
 
-    private WordParser(){}
+    private WordParser() {
+    }
 
-    public static WordParser getInstance(){
-        if (wordParser == null){
+    public static WordParser getInstance() {
+        if (wordParser == null) {
             wordParser = new WordParser();
         }
 
@@ -20,17 +21,17 @@ public class WordParser implements Parser {
 
     @Override
     public TextComponent parseTextComponent(String content) {
-        if (content == null || content.isEmpty()){
+        if (content == null || content.isEmpty()) {
             throw new IllegalArgumentException("Incorrect content.");
         }
         Parser parser = SymbolParser.getInstance();
         TextComposite word = new TextComposite();
         word.setComponentType(ComponentType.WORD);
 
-        if (content.length() == SYMBOL_LENGTH){
+        if (content.length() == SYMBOL_LENGTH) {
             Symbol symbol = (Symbol) parser.parseTextComponent(content);
 
-            if (symbol.getSymbolType() == SymbolType.ALPHABET){
+            if (symbol.getSymbolType() == SymbolType.ALPHABET) {
                 word.addTextComponent(symbol);
 
                 return word;
