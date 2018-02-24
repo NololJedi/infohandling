@@ -1,6 +1,6 @@
 package by.epam.infohandling;
 
-import by.epam.infohandling.text.parsers.ContentMatcher;
+import by.epam.infohandling.util.ContentMatcher;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static by.epam.infohandling.text.parsers.ContentMatcher.*;
+import static by.epam.infohandling.util.ContentMatcher.*;
 
 @RunWith(DataProviderRunner.class)
 public class ContentMatcherTest {

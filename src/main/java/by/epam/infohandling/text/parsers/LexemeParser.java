@@ -1,11 +1,13 @@
 package by.epam.infohandling.text.parsers;
 
-import by.epam.infohandling.text.composite.*;
+import by.epam.infohandling.text.composite.Symbol;
+import by.epam.infohandling.text.composite.SymbolType;
+import by.epam.infohandling.text.composite.TextComponent;
 import by.epam.infohandling.text.composite.lexeme.Lexeme;
 import by.epam.infohandling.text.composite.lexeme.LexemeType;
+import by.epam.infohandling.util.ContentMatcher;
 
-import static by.epam.infohandling.text.parsers.ContentMatcher.LEXEME_WORD_PATTERN;
-import static by.epam.infohandling.text.parsers.ContentMatcher.SYMBOL_LENGTH;
+import static by.epam.infohandling.util.ContentMatcher.*;
 
 public class LexemeParser implements Parser {
 
@@ -38,27 +40,41 @@ public class LexemeParser implements Parser {
             if (symbol.getSymbolType() == SymbolType.ALPHABET) {
                 lexeme.addTextComponent(symbol);
                 lexeme.setLexemeType(LexemeType.WORD);
+
                 return lexeme;
             } else {
-
                 return symbol;
             }
         }
 
-        boolean lexemeTypeMatch = ContentMatcher.contentMatch(content,LEXEME_WORD_PATTERN);
+        boolean isLexemeTypeWord = ContentMatcher.contentMatch(content, LEXEME_WORD_PATTERN);
 
-        if (lexemeTypeMatch){
+        if (isLexemeTypeWord) {
             lexeme.setLexemeType(LexemeType.WORD);
         } else {
             lexeme.setLexemeType(LexemeType.MATH_EXPRESSION);
         }
 
-        char[] contentSymbols = content.toCharArray();
-        for (char contentSymbol : contentSymbols) {
-            String currentContent = String.valueOf(contentSymbol);
-            TextComponent component = nextParser.parseTextComponent(currentContent);
+        int lastSymbolIdentifier = content.length() - 1;
+        String lastSymbol = String.valueOf(content.charAt(lastSymbolIdentifier));
 
-            lexeme.addTextComponent(component);
+        boolean isLastSymbolPunctuation = ContentMatcher.contentMatch(lastSymbol, SYMBOL_PUNCTUATION_PATTERN);
+        if (isLastSymbolPunctuation) {
+            content = content.replaceAll(lastSymbol, "");
+
+            TextComponent word = parseTextComponent(content);
+            lexeme.addTextComponent(word);
+
+            TextComponent punctuationSymbol = parseTextComponent(lastSymbol);
+            lexeme.addTextComponent(punctuationSymbol);
+        } else {
+            char[] contentSymbols = content.toCharArray();
+            for (char contentSymbol : contentSymbols) {
+                String currentContent = String.valueOf(contentSymbol);
+                TextComponent component = nextParser.parseTextComponent(currentContent);
+
+                lexeme.addTextComponent(component);
+            }
         }
 
         return lexeme;

@@ -2,12 +2,15 @@ package by.epam.infohandling.text.parsers;
 
 import by.epam.infohandling.text.composite.Symbol;
 import by.epam.infohandling.text.composite.SymbolType;
+import by.epam.infohandling.text.composite.TextComponent;
 import by.epam.infohandling.text.composite.TextComposite;
 import by.epam.infohandling.text.composite.lexeme.Lexeme;
 import by.epam.infohandling.text.composite.lexeme.LexemeType;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.List;
 
 public class LexemeParserTest {
 
@@ -16,9 +19,6 @@ public class LexemeParserTest {
     private static final String MATH_EXPRESSION_EXAMPLE = "3*3+(3*3)";
 
     private static Lexeme article;
-    private static Lexeme word;
-    private static Lexeme mathExpression;
-
     private static LexemeParser lexemeParser;
 
     @BeforeClass
@@ -27,54 +27,54 @@ public class LexemeParserTest {
     }
 
     @BeforeClass
-    public static void setTestingObjects() {
+    public static void setArticle() {
         Symbol symbol = new Symbol("a", SymbolType.ALPHABET);
         article = new Lexeme();
         article.setLexemeType(LexemeType.WORD);
         article.addTextComponent(symbol);
-
-        Symbol firstLetter = new Symbol("D", SymbolType.ALPHABET);
-        Symbol secondLetter = new Symbol("o", SymbolType.ALPHABET);
-        Symbol thirdLetter = new Symbol("g", SymbolType.ALPHABET);
-
-        word = new Lexeme();
-        word.setLexemeType(LexemeType.WORD);
-        word.addTextComponent(firstLetter);
-        word.addTextComponent(secondLetter);
-        word.addTextComponent(thirdLetter);
-
-        Symbol number = new Symbol("3",SymbolType.NUMBER);
-        Symbol plus = new Symbol("+",SymbolType.MATH);
-        Symbol multiplication = new Symbol("*",SymbolType.MATH);
-        Symbol openBracket = new Symbol("(",SymbolType.MATH);
-        Symbol closeBracket = new Symbol(")",SymbolType.MATH);
-
-        mathExpression = new Lexeme();
-        mathExpression.setLexemeType(LexemeType.MATH_EXPRESSION);
-        mathExpression.addTextComponent(number);
-        mathExpression.addTextComponent(multiplication);
-        mathExpression.addTextComponent(number);
-        mathExpression.addTextComponent(plus);
-        mathExpression.addTextComponent(openBracket);
-        mathExpression.addTextComponent(number);
-        mathExpression.addTextComponent(multiplication);
-        mathExpression.addTextComponent(number);
-        mathExpression.addTextComponent(closeBracket);
     }
 
     @Test
     public void shouldWordParsingBeSuccessful() {
         Lexeme actualWord = (Lexeme) lexemeParser.parseTextComponent(WORD_CONTENT_EXAMPLE);
+        List<TextComponent> actualLetters = actualWord.getTextComponents();
 
-        Assert.assertEquals(word, actualWord);
+        Symbol firstLetter = new Symbol("D", SymbolType.ALPHABET);
+        Symbol secondLetter = new Symbol("o", SymbolType.ALPHABET);
+        Symbol thirdLetter = new Symbol("g", SymbolType.ALPHABET);
+
+        Symbol actualFirstLetter = (Symbol) actualLetters.get(0);
+        Symbol actualSecondLetter = (Symbol) actualLetters.get(1);
+        Symbol actualThirdLetter = (Symbol) actualLetters.get(2);
+
+        LexemeType actualType = actualWord.getLexemeType();
+
+        Assert.assertEquals(firstLetter,actualFirstLetter);
+        Assert.assertEquals(secondLetter,actualSecondLetter);
+        Assert.assertEquals(thirdLetter,actualThirdLetter);
+        Assert.assertEquals(LexemeType.WORD,actualType);
     }
 
     @Test
     public void shouldWordParsingFailed() {
-        String incorrectWordContent = "dog.";
+        String incorrectWordContent = "Cat";
         Lexeme actualWord = (Lexeme) lexemeParser.parseTextComponent(incorrectWordContent);
+        List<TextComponent> actualLetters = actualWord.getTextComponents();
 
-        Assert.assertNotEquals(word, actualWord);
+        Symbol firstLetter = new Symbol("D", SymbolType.ALPHABET);
+        Symbol secondLetter = new Symbol("o", SymbolType.ALPHABET);
+        Symbol thirdLetter = new Symbol("g", SymbolType.ALPHABET);
+
+        Symbol actualFirstLetter = (Symbol) actualLetters.get(0);
+        Symbol actualSecondLetter = (Symbol) actualLetters.get(1);
+        Symbol actualThirdLetter = (Symbol) actualLetters.get(2);
+
+        LexemeType actualType = actualWord.getLexemeType();
+
+        Assert.assertNotEquals(firstLetter,actualFirstLetter);
+        Assert.assertNotEquals(secondLetter,actualSecondLetter);
+        Assert.assertNotEquals(thirdLetter,actualThirdLetter);
+        Assert.assertNotEquals(LexemeType.MATH_EXPRESSION,actualType);
     }
 
     @Test
@@ -92,16 +92,74 @@ public class LexemeParserTest {
 
     @Test
     public void shouldMathExpressionParsingBeSuccessful(){
-        Lexeme actualLexeme = (Lexeme) lexemeParser.parseTextComponent(MATH_EXPRESSION_EXAMPLE);
+        Lexeme actualMathExpression = (Lexeme) lexemeParser.parseTextComponent(MATH_EXPRESSION_EXAMPLE);
+        List<TextComponent> actualSymbols = actualMathExpression.getTextComponents();
 
-        Assert.assertEquals(mathExpression,actualLexeme);
+        Symbol number = new Symbol("3",SymbolType.NUMBER);
+        Symbol plus = new Symbol("+",SymbolType.MATH);
+        Symbol multiplication = new Symbol("*",SymbolType.MATH);
+        Symbol openBracket = new Symbol("(",SymbolType.MATH);
+        Symbol closeBracket = new Symbol(")",SymbolType.MATH);
+
+        Symbol firstSymbol = (Symbol) actualSymbols.get(0);
+        Symbol secondSymbol = (Symbol) actualSymbols.get(1);
+        Symbol thirdSymbol = (Symbol) actualSymbols.get(2);
+        Symbol fourthSymbol = (Symbol) actualSymbols.get(3);
+        Symbol fifthSymbol = (Symbol) actualSymbols.get(4);
+        Symbol sixthSymbol = (Symbol) actualSymbols.get(5);
+        Symbol seventhSymbol = (Symbol) actualSymbols.get(6);
+        Symbol eighthSymbol = (Symbol) actualSymbols.get(7);
+        Symbol ninthSymbol = (Symbol) actualSymbols.get(8);
+
+        LexemeType actualType = actualMathExpression.getLexemeType();
+
+        Assert.assertEquals(number,firstSymbol);
+        Assert.assertEquals(multiplication,secondSymbol);
+        Assert.assertEquals(number,thirdSymbol);
+        Assert.assertEquals(plus,fourthSymbol);
+        Assert.assertEquals(openBracket,fifthSymbol);
+        Assert.assertEquals(number,sixthSymbol);
+        Assert.assertEquals(multiplication,seventhSymbol);
+        Assert.assertEquals(number,eighthSymbol);
+        Assert.assertEquals(closeBracket,ninthSymbol);
+
+        Assert.assertEquals(LexemeType.MATH_EXPRESSION,actualType);
     }
 
     @Test
     public void shouldMathExpressionParsingFailed(){
-        String currentMathContent = "2+2*45";
-        Lexeme actualLexeme = (Lexeme) lexemeParser.parseTextComponent(currentMathContent);
+        String currentMathContent = "1/2-15-45";
+        Lexeme actualMathExpression = (Lexeme) lexemeParser.parseTextComponent(currentMathContent);
+        List<TextComponent> actualSymbols = actualMathExpression.getTextComponents();
 
-        Assert.assertNotEquals(mathExpression,actualLexeme);
+        Symbol number = new Symbol("3",SymbolType.NUMBER);
+        Symbol plus = new Symbol("+",SymbolType.MATH);
+        Symbol multiplication = new Symbol("*",SymbolType.MATH);
+        Symbol openBracket = new Symbol("(",SymbolType.MATH);
+        Symbol closeBracket = new Symbol(")",SymbolType.MATH);
+
+        Symbol firstSymbol = (Symbol) actualSymbols.get(0);
+        Symbol secondSymbol = (Symbol) actualSymbols.get(1);
+        Symbol thirdSymbol = (Symbol) actualSymbols.get(2);
+        Symbol fourthSymbol = (Symbol) actualSymbols.get(3);
+        Symbol fifthSymbol = (Symbol) actualSymbols.get(4);
+        Symbol sixthSymbol = (Symbol) actualSymbols.get(5);
+        Symbol seventhSymbol = (Symbol) actualSymbols.get(6);
+        Symbol eighthSymbol = (Symbol) actualSymbols.get(7);
+        Symbol ninthSymbol = (Symbol) actualSymbols.get(8);
+
+        LexemeType actualType = actualMathExpression.getLexemeType();
+
+        Assert.assertNotEquals(number,firstSymbol);
+        Assert.assertNotEquals(multiplication,secondSymbol);
+        Assert.assertNotEquals(number,thirdSymbol);
+        Assert.assertNotEquals(plus,fourthSymbol);
+        Assert.assertNotEquals(openBracket,fifthSymbol);
+        Assert.assertNotEquals(number,sixthSymbol);
+        Assert.assertNotEquals(multiplication,seventhSymbol);
+        Assert.assertNotEquals(number,eighthSymbol);
+        Assert.assertNotEquals(closeBracket,ninthSymbol);
+
+        Assert.assertNotEquals(LexemeType.WORD,actualType);
     }
 }

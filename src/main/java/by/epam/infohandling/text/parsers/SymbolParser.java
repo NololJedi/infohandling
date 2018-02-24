@@ -5,7 +5,7 @@ import by.epam.infohandling.text.composite.SymbolType;
 import by.epam.infohandling.text.composite.TextComponent;
 import by.epam.infohandling.text.composite.TextComposite;
 
-import static by.epam.infohandling.text.parsers.ContentMatcher.*;
+import static by.epam.infohandling.util.ContentMatcher.*;
 
 public class SymbolParser implements Parser {
 

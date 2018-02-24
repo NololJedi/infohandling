@@ -1,10 +1,11 @@
 package by.epam.infohandling.text.parsers;
 
-import by.epam.infohandling.text.composite.ComponentType;
-import by.epam.infohandling.text.composite.TextComponent;
-import by.epam.infohandling.text.composite.TextComposite;
+import by.epam.infohandling.text.composite.*;
 
 public class SentenceParser implements Parser {
+
+    private static final String LEXEME_SPLIT_IDENTIFIER = " ";
+    private static final int LAST_LEXEME_IDENTIFIER = 1;
 
     private static SentenceParser sentenceParser = null;
 
@@ -28,23 +29,21 @@ public class SentenceParser implements Parser {
         sentence.setComponentType(ComponentType.SENTENCE);
 
         setNextParser(LexemeParser.getInstance());
-        String firstWordContent = wordInjector(content);
-        TextComponent firstWord = nextParser.parseTextComponent(firstWordContent);
-        sentence.addTextComponent(firstWord);
 
+        String[] lexemes = content.split(LEXEME_SPLIT_IDENTIFIER);
+        Symbol space = new Symbol(LEXEME_SPLIT_IDENTIFIER, SymbolType.PUNCTUATION);
 
+        for (int arrayIndex = 0; arrayIndex < lexemes.length; arrayIndex++) {
+            String currentContent = lexemes[arrayIndex];
+            TextComponent currentComponent = nextParser.parseTextComponent(currentContent);
+            sentence.addTextComponent(currentComponent);
+
+            if (arrayIndex != lexemes.length - LAST_LEXEME_IDENTIFIER){
+                sentence.addTextComponent(space);
+            }
+        }
 
         return sentence;
-    }
-
-    private String wordInjector(String content){
-        char space = ' ';
-        int lineStart = 0;
-        int firstSpaceIndex = content.indexOf(space);
-
-        String firstWord = content.substring(lineStart,firstSpaceIndex);
-
-        return firstWord;
     }
 
     private void setNextParser(Parser nextParser) {

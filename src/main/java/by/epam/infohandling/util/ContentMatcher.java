@@ -1,4 +1,4 @@
-package by.epam.infohandling.text.parsers;
+package by.epam.infohandling.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
