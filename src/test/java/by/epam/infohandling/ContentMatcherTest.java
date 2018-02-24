@@ -14,45 +14,49 @@ import static by.epam.infohandling.util.ContentMatcher.*;
 public class ContentMatcherTest {
 
     @DataProvider
-    public static Object[][] correctValues(){
+    public static Object[][] correctValues() {
         String letter = "a";
         String number = "2";
         String math = "*";
         String punctuation = ".";
         String word = "correct";
+        String wordAndDot = "correct.";
         String mathExpression = "6+9*(3-4)";
 
         return new Object[][]{
-                {letter,SYMBOL_ALPHABET_PATTERN,true},
-                {number,SYMBOL_NUMBER_PATTERN,true},
-                {math,SYMBOL_MATH_PATTERN,true},
-                {punctuation,SYMBOL_PUNCTUATION_PATTERN,true},
-                {word,LEXEME_WORD_PATTERN,true},
-                {mathExpression,LEXEME_WORD_PATTERN,false}
+                {letter, SYMBOL_ALPHABET_PATTERN, true},
+                {number, SYMBOL_NUMBER_PATTERN, true},
+                {math, SYMBOL_MATH_PATTERN, true},
+                {punctuation, SYMBOL_PUNCTUATION_PATTERN, true},
+                {word, LEXEME_WORD_PATTERN, true},
+                {mathExpression, LEXEME_WORD_PATTERN, false},
+                {wordAndDot, LEXEME_WORD_PATTERN, true}
         };
     }
 
     @DataProvider
-    public static Object[][] incorrectValues(){
+    public static Object[][] incorrectValues() {
         String letter = "2";
         String number = ",";
         String math = "s";
         String punctuation = "/";
         String mathExpression = "correct";
         String word = "6+9*(3-4)";
+        String wordAndDot = "correct.asd";
 
         return new Object[][]{
-                {letter,SYMBOL_ALPHABET_PATTERN,true},
-                {number,SYMBOL_ALPHABET_PATTERN,true},
-                {math,SYMBOL_MATH_PATTERN,true},
-                {punctuation,SYMBOL_PUNCTUATION_PATTERN,true},
-                {word,LEXEME_WORD_PATTERN,true},
-                {mathExpression,LEXEME_WORD_PATTERN,false}
+                {letter, SYMBOL_ALPHABET_PATTERN, true},
+                {number, SYMBOL_ALPHABET_PATTERN, true},
+                {math, SYMBOL_MATH_PATTERN, true},
+                {punctuation, SYMBOL_PUNCTUATION_PATTERN, true},
+                {word, LEXEME_WORD_PATTERN, true},
+                {mathExpression, LEXEME_WORD_PATTERN, false},
+                {wordAndDot, LEXEME_WORD_PATTERN, true}
         };
     }
 
     @DataProvider
-    public static Object[][] exceptionValues(){
+    public static Object[][] exceptionValues() {
         String nullContent = null;
         String emptyContent = "";
         String nullPatter = null;
@@ -61,32 +65,32 @@ public class ContentMatcherTest {
         String content = "A";
 
         return new Object[][]{
-                {nullContent,SYMBOL_ALPHABET_PATTERN},
-                {emptyContent,SYMBOL_ALPHABET_PATTERN},
-                {content,nullPatter},
-                {content,emptyPattern}
+                {nullContent, SYMBOL_ALPHABET_PATTERN},
+                {emptyContent, SYMBOL_ALPHABET_PATTERN},
+                {content, nullPatter},
+                {content, emptyPattern}
         };
     }
 
     @Test
     @UseDataProvider("correctValues")
-    public void shouldMatchingBeSuccessful(String content, String pattern, boolean expectedResult){
-        boolean actualResult = ContentMatcher.contentMatch(content,pattern);
+    public void shouldMatchingBeSuccessful(String content, String pattern, boolean expectedResult) {
+        boolean actualResult = ContentMatcher.contentMatch(content, pattern);
 
         Assert.assertEquals(expectedResult, actualResult);
     }
 
     @Test
     @UseDataProvider("incorrectValues")
-    public void shouldMatchingFailed(String content, String pattern, boolean expectedResult){
-        boolean actualResult = ContentMatcher.contentMatch(content,pattern);
+    public void shouldMatchingFailed(String content, String pattern, boolean expectedResult) {
+        boolean actualResult = ContentMatcher.contentMatch(content, pattern);
 
-        Assert.assertNotEquals(expectedResult,actualResult);
+        Assert.assertNotEquals(expectedResult, actualResult);
     }
 
     @Test(expected = IllegalArgumentException.class)
     @UseDataProvider("exceptionValues")
-    public void shouldMatchingCauseIllegalArgumentException(String content, String pattern){
-        ContentMatcher.contentMatch(content,pattern);
+    public void shouldMatchingCauseIllegalArgumentException(String content, String pattern) {
+        ContentMatcher.contentMatch(content, pattern);
     }
 }

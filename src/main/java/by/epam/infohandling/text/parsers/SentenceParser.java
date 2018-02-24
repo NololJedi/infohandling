@@ -1,6 +1,9 @@
 package by.epam.infohandling.text.parsers;
 
 import by.epam.infohandling.text.composite.*;
+import by.epam.infohandling.util.ContentMatcher;
+
+import static by.epam.infohandling.util.ContentMatcher.SYMBOL_PUNCTUATION_PATTERN;
 
 public class SentenceParser implements Parser {
 
@@ -25,6 +28,10 @@ public class SentenceParser implements Parser {
 
     @Override
     public TextComponent parseTextComponent(String content) {
+        if (content == null || content.isEmpty()) {
+            throw new IllegalArgumentException("Incorrect content.");
+        }
+
         TextComposite sentence = new TextComposite();
         sentence.setComponentType(ComponentType.SENTENCE);
 
@@ -35,10 +42,24 @@ public class SentenceParser implements Parser {
 
         for (int arrayIndex = 0; arrayIndex < lexemes.length; arrayIndex++) {
             String currentContent = lexemes[arrayIndex];
-            TextComponent currentComponent = nextParser.parseTextComponent(currentContent);
-            sentence.addTextComponent(currentComponent);
 
-            if (arrayIndex != lexemes.length - LAST_LEXEME_IDENTIFIER){
+            int lastSymbolIdentifier = currentContent.length() - 1;
+            String lastSymbol = String.valueOf(currentContent.charAt(lastSymbolIdentifier));
+
+            boolean isLastSymbolPunctuation = ContentMatcher.contentMatch(lastSymbol, SYMBOL_PUNCTUATION_PATTERN);
+            if (isLastSymbolPunctuation) {
+                currentContent = currentContent.replace(lastSymbol, "");
+
+                TextComponent word = nextParser.parseTextComponent(currentContent);
+                sentence.addTextComponent(word);
+
+                TextComponent punctuationSymbol = nextParser.parseTextComponent(lastSymbol);
+                sentence.addTextComponent(punctuationSymbol);
+            } else {
+                TextComponent currentComponent = nextParser.parseTextComponent(currentContent);
+                sentence.addTextComponent(currentComponent);
+            }
+            if (arrayIndex != lexemes.length - LAST_LEXEME_IDENTIFIER) {
                 sentence.addTextComponent(space);
             }
         }

@@ -7,7 +7,8 @@ import by.epam.infohandling.text.composite.lexeme.Lexeme;
 import by.epam.infohandling.text.composite.lexeme.LexemeType;
 import by.epam.infohandling.util.ContentMatcher;
 
-import static by.epam.infohandling.util.ContentMatcher.*;
+import static by.epam.infohandling.util.ContentMatcher.LEXEME_WORD_PATTERN;
+import static by.epam.infohandling.util.ContentMatcher.SYMBOL_LENGTH;
 
 public class LexemeParser implements Parser {
 
@@ -31,8 +32,9 @@ public class LexemeParser implements Parser {
         if (content == null || content.isEmpty()) {
             throw new IllegalArgumentException("Incorrect content.");
         }
-        setNextParser(SymbolParser.getInstance());
         Lexeme lexeme = new Lexeme();
+
+        setNextParser(SymbolParser.getInstance());
 
         if (content.length() == SYMBOL_LENGTH) {
             Symbol symbol = (Symbol) nextParser.parseTextComponent(content);
@@ -55,28 +57,13 @@ public class LexemeParser implements Parser {
             lexeme.setLexemeType(LexemeType.MATH_EXPRESSION);
         }
 
-        int lastSymbolIdentifier = content.length() - 1;
-        String lastSymbol = String.valueOf(content.charAt(lastSymbolIdentifier));
+        char[] contentSymbols = content.toCharArray();
+        for (char contentSymbol : contentSymbols) {
+            String currentContent = String.valueOf(contentSymbol);
+            TextComponent component = nextParser.parseTextComponent(currentContent);
 
-        boolean isLastSymbolPunctuation = ContentMatcher.contentMatch(lastSymbol, SYMBOL_PUNCTUATION_PATTERN);
-        if (isLastSymbolPunctuation) {
-            content = content.replaceAll(lastSymbol, "");
-
-            TextComponent word = parseTextComponent(content);
-            lexeme.addTextComponent(word);
-
-            TextComponent punctuationSymbol = parseTextComponent(lastSymbol);
-            lexeme.addTextComponent(punctuationSymbol);
-        } else {
-            char[] contentSymbols = content.toCharArray();
-            for (char contentSymbol : contentSymbols) {
-                String currentContent = String.valueOf(contentSymbol);
-                TextComponent component = nextParser.parseTextComponent(currentContent);
-
-                lexeme.addTextComponent(component);
-            }
+            lexeme.addTextComponent(component);
         }
-
         return lexeme;
     }
 

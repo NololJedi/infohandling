@@ -4,7 +4,6 @@ import by.epam.infohandling.text.composite.Symbol;
 import by.epam.infohandling.text.composite.SymbolType;
 import by.epam.infohandling.text.composite.TextComponent;
 import by.epam.infohandling.text.composite.TextComposite;
-import by.epam.infohandling.text.parsers.SymbolParser;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
