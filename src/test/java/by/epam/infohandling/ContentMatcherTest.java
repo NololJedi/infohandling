@@ -19,12 +19,16 @@ public class ContentMatcherTest {
         String number = "2";
         String math = "*";
         String punctuation = ".";
+        String word = "correct";
+        String mathExpression = "6+9*(3-4)";
 
         return new Object[][]{
                 {letter,SYMBOL_ALPHABET_PATTERN,true},
                 {number,SYMBOL_NUMBER_PATTERN,true},
                 {math,SYMBOL_MATH_PATTERN,true},
-                {punctuation,SYMBOL_PUNCTUATION_PATTERN,true}
+                {punctuation,SYMBOL_PUNCTUATION_PATTERN,true},
+                {word,LEXEME_WORD_PATTERN,true},
+                {mathExpression,LEXEME_WORD_PATTERN,false}
         };
     }
 
@@ -34,12 +38,16 @@ public class ContentMatcherTest {
         String number = ",";
         String math = "s";
         String punctuation = "/";
+        String mathExpression = "correct";
+        String word = "6+9*(3-4)";
 
         return new Object[][]{
                 {letter,SYMBOL_ALPHABET_PATTERN,true},
                 {number,SYMBOL_ALPHABET_PATTERN,true},
                 {math,SYMBOL_MATH_PATTERN,true},
-                {punctuation,SYMBOL_PUNCTUATION_PATTERN,true}
+                {punctuation,SYMBOL_PUNCTUATION_PATTERN,true},
+                {word,LEXEME_WORD_PATTERN,true},
+                {mathExpression,LEXEME_WORD_PATTERN,false}
         };
     }
 

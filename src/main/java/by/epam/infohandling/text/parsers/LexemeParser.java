@@ -1,8 +1,11 @@
 package by.epam.infohandling.text.parsers;
 
 import by.epam.infohandling.text.composite.*;
+import by.epam.infohandling.text.composite.lexeme.Lexeme;
+import by.epam.infohandling.text.composite.lexeme.LexemeType;
 
-import static by.epam.infohandling.text.parsers.ContentMatcher.LEXEME_IDENTIFIER;
+import static by.epam.infohandling.text.parsers.ContentMatcher.LEXEME_WORD_PATTERN;
+import static by.epam.infohandling.text.parsers.ContentMatcher.SYMBOL_LENGTH;
 
 public class LexemeParser implements Parser {
 
@@ -13,12 +16,7 @@ public class LexemeParser implements Parser {
     private LexemeParser() {
     }
 
-    private void setNextParser(Parser nextParser) {
-        this.nextParser = nextParser;
-    }
-
     public static LexemeParser getInstance() {
-
         if (lexemeParser == null) {
             lexemeParser = new LexemeParser();
         }
@@ -28,25 +26,45 @@ public class LexemeParser implements Parser {
 
     @Override
     public TextComponent parseTextComponent(String content) {
-       setNextParser(WordParser.getInstance());
+        if (content == null || content.isEmpty()) {
+            throw new IllegalArgumentException("Incorrect content.");
+        }
+        setNextParser(SymbolParser.getInstance());
+        Lexeme lexeme = new Lexeme();
 
-        TextComposite lexeme = new TextComposite();
-        lexeme.setComponentType(ComponentType.LEXEME);
+        if (content.length() == SYMBOL_LENGTH) {
+            Symbol symbol = (Symbol) nextParser.parseTextComponent(content);
 
-        Symbol spaceSymbol = new Symbol(LEXEME_IDENTIFIER, SymbolType.PUNCTUATION);
-        lexeme.addTextComponent(spaceSymbol);
+            if (symbol.getSymbolType() == SymbolType.ALPHABET) {
+                lexeme.addTextComponent(symbol);
+                lexeme.setLexemeType(LexemeType.WORD);
+                return lexeme;
+            } else {
 
-        content = content.trim();
-        String[] words = content.split(LEXEME_IDENTIFIER);
+                return symbol;
+            }
+        }
 
-        for (String word : words) {
-            TextComposite currentWord = (TextComposite) nextParser.parseTextComponent(word);
+        boolean lexemeTypeMatch = ContentMatcher.contentMatch(content,LEXEME_WORD_PATTERN);
 
-            lexeme.addTextComponent(currentWord);
-            lexeme.addTextComponent(spaceSymbol);
+        if (lexemeTypeMatch){
+            lexeme.setLexemeType(LexemeType.WORD);
+        } else {
+            lexeme.setLexemeType(LexemeType.MATH_EXPRESSION);
+        }
+
+        char[] contentSymbols = content.toCharArray();
+        for (char contentSymbol : contentSymbols) {
+            String currentContent = String.valueOf(contentSymbol);
+            TextComponent component = nextParser.parseTextComponent(currentContent);
+
+            lexeme.addTextComponent(component);
         }
 
         return lexeme;
     }
 
+    private void setNextParser(Parser nextParser) {
+        this.nextParser = nextParser;
+    }
 }

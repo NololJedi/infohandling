@@ -12,8 +12,7 @@ public class ContentMatcher {
     public static final String SYMBOL_MATH_PATTERN = "-|\\(|\\)|\\*|[+]|/";
     public static final String SYMBOL_PUNCTUATION_PATTERN = "\\s|\\.|,|!|\\?";
 
-    public static final String LEXEME_IDENTIFIER = " ";
-    public static final String LEXEME_PATTERN = "\\s.+\\s";
+    public static final String LEXEME_WORD_PATTERN = "^[a-zA-Z]+";
 
     public static boolean contentMatch(String content, String pattern) {
         if (content == null || content.isEmpty()) {

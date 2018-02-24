@@ -1,116 +1,107 @@
 package by.epam.infohandling.text.parsers;
 
-import by.epam.infohandling.text.composite.*;
-import by.epam.infohandling.text.parsers.LexemeParser;
+import by.epam.infohandling.text.composite.Symbol;
+import by.epam.infohandling.text.composite.SymbolType;
+import by.epam.infohandling.text.composite.TextComposite;
+import by.epam.infohandling.text.composite.lexeme.Lexeme;
+import by.epam.infohandling.text.composite.lexeme.LexemeType;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.List;
-
-import static by.epam.infohandling.text.parsers.ContentMatcher.LEXEME_IDENTIFIER;
-
 public class LexemeParserTest {
 
-    public static final String CONTENT = " lex pars test ";
+    private static final String ARTICLE_CONTENT_EXAMPLE = "a";
+    private static final String WORD_CONTENT_EXAMPLE = "Dog";
+    private static final String MATH_EXPRESSION_EXAMPLE = "3*3+(3*3)";
 
-    public static LexemeParser lexemeParser;
+    private static Lexeme article;
+    private static Lexeme word;
+    private static Lexeme mathExpression;
 
-    public static TextComponent space;
-    public static TextComposite lexemeWord;
-    public static TextComposite parserWord;
-    public static TextComposite testWord;
+    private static LexemeParser lexemeParser;
 
     @BeforeClass
-    public static void setLexemeParser(){
+    public static void setWordParser() {
         lexemeParser = LexemeParser.getInstance();
     }
 
     @BeforeClass
-    public static void setTestingObjects(){
-        space = new Symbol(LEXEME_IDENTIFIER, SymbolType.PUNCTUATION);
+    public static void setTestingObjects() {
+        Symbol symbol = new Symbol("a", SymbolType.ALPHABET);
+        article = new Lexeme();
+        article.setLexemeType(LexemeType.WORD);
+        article.addTextComponent(symbol);
 
-        Symbol letterL = new Symbol("l",SymbolType.ALPHABET);
-        Symbol letterE = new Symbol("e",SymbolType.ALPHABET);
-        Symbol letterX = new Symbol("x",SymbolType.ALPHABET);
-        Symbol letterP = new Symbol("p",SymbolType.ALPHABET);
-        Symbol letterA = new Symbol("a",SymbolType.ALPHABET);
-        Symbol letterR = new Symbol("r",SymbolType.ALPHABET);
-        Symbol letterS = new Symbol("s",SymbolType.ALPHABET);
-        Symbol letterT = new Symbol("t",SymbolType.ALPHABET);
+        Symbol firstLetter = new Symbol("D", SymbolType.ALPHABET);
+        Symbol secondLetter = new Symbol("o", SymbolType.ALPHABET);
+        Symbol thirdLetter = new Symbol("g", SymbolType.ALPHABET);
 
-        lexemeWord = new TextComposite();
-        lexemeWord.setComponentType(ComponentType.WORD);
-        lexemeWord.addTextComponent(letterL);
-        lexemeWord.addTextComponent(letterE);
-        lexemeWord.addTextComponent(letterX);
+        word = new Lexeme();
+        word.setLexemeType(LexemeType.WORD);
+        word.addTextComponent(firstLetter);
+        word.addTextComponent(secondLetter);
+        word.addTextComponent(thirdLetter);
 
-        parserWord = new TextComposite();
-        parserWord.setComponentType(ComponentType.WORD);
-        parserWord.addTextComponent(letterP);
-        parserWord.addTextComponent(letterA);
-        parserWord.addTextComponent(letterR);
-        parserWord.addTextComponent(letterS);
+        Symbol number = new Symbol("3",SymbolType.NUMBER);
+        Symbol plus = new Symbol("+",SymbolType.MATH);
+        Symbol multiplication = new Symbol("*",SymbolType.MATH);
+        Symbol openBracket = new Symbol("(",SymbolType.MATH);
+        Symbol closeBracket = new Symbol(")",SymbolType.MATH);
 
-        testWord = new TextComposite();
-        testWord.setComponentType(ComponentType.WORD);
-        testWord.addTextComponent(letterT);
-        testWord.addTextComponent(letterE);
-        testWord.addTextComponent(letterS);
-        testWord.addTextComponent(letterT);
+        mathExpression = new Lexeme();
+        mathExpression.setLexemeType(LexemeType.MATH_EXPRESSION);
+        mathExpression.addTextComponent(number);
+        mathExpression.addTextComponent(multiplication);
+        mathExpression.addTextComponent(number);
+        mathExpression.addTextComponent(plus);
+        mathExpression.addTextComponent(openBracket);
+        mathExpression.addTextComponent(number);
+        mathExpression.addTextComponent(multiplication);
+        mathExpression.addTextComponent(number);
+        mathExpression.addTextComponent(closeBracket);
     }
 
     @Test
-    public void shouldLexemeParsingBeSuccessful(){
-        TextComposite lexeme = (TextComposite) lexemeParser.parseTextComponent(CONTENT);
-        List<TextComponent> lexemeComponents = lexeme.getTextComponents();
+    public void shouldWordParsingBeSuccessful() {
+        Lexeme actualWord = (Lexeme) lexemeParser.parseTextComponent(WORD_CONTENT_EXAMPLE);
 
-        TextComponent firstSpaceSymbol = lexemeComponents.get(0);
-        Assert.assertEquals(space,firstSpaceSymbol);
-
-        TextComponent actualLexemeWord = lexemeComponents.get(1);
-        Assert.assertEquals(lexemeWord,actualLexemeWord);
-
-        TextComponent secondSpaceSymbol = lexemeComponents.get(2);
-        Assert.assertEquals(space, secondSpaceSymbol);
-
-        TextComponent actualParserWord = lexemeComponents.get(3);
-        Assert.assertEquals(parserWord,actualParserWord);
-
-        TextComponent thirdSpaceSymbol = lexemeComponents.get(4);
-        Assert.assertEquals(space, thirdSpaceSymbol);
-
-        TextComponent actualTestWord = lexemeComponents.get(5);
-        Assert.assertEquals(testWord,actualTestWord);
-
-        TextComponent fourthSpaceSymbol = lexemeComponents.get(6);
-        Assert.assertEquals(space, fourthSpaceSymbol);
+        Assert.assertEquals(word, actualWord);
     }
 
     @Test
-    public void shouldLexemeParsingFailed(){
+    public void shouldWordParsingFailed() {
+        String incorrectWordContent = "dog.";
+        Lexeme actualWord = (Lexeme) lexemeParser.parseTextComponent(incorrectWordContent);
 
-        TextComposite lexeme = (TextComposite) lexemeParser.parseTextComponent(CONTENT);
-        List<TextComponent> lexemeComponents = lexeme.getTextComponents();
+        Assert.assertNotEquals(word, actualWord);
+    }
 
-        TextComponent firstSpaceSymbol = lexemeComponents.get(0);
-        Assert.assertNotEquals(lexemeWord,firstSpaceSymbol);
+    @Test
+    public void shouldArticleParsingBeSuccessful() {
+        Lexeme actualArticle = (Lexeme) lexemeParser.parseTextComponent(ARTICLE_CONTENT_EXAMPLE);
 
-        TextComponent actualLexemeWord = lexemeComponents.get(1);
-        Assert.assertNotEquals(space,actualLexemeWord);
+        Assert.assertEquals(article, actualArticle);
+    }
 
-        TextComponent secondSpaceSymbol = lexemeComponents.get(2);
-        Assert.assertNotEquals(parserWord, secondSpaceSymbol);
+    @Test(expected = ClassCastException.class)
+    public void shouldArticleParsingFailed() {
+        String incorrectArticleContent = ".";
+        TextComposite actualArticle = (TextComposite) lexemeParser.parseTextComponent(incorrectArticleContent);
+    }
 
-        TextComponent actualParserWord = lexemeComponents.get(3);
-        Assert.assertNotEquals(space,actualParserWord);
+    @Test
+    public void shouldMathExpressionParsingBeSuccessful(){
+        Lexeme actualLexeme = (Lexeme) lexemeParser.parseTextComponent(MATH_EXPRESSION_EXAMPLE);
 
-        TextComponent thirdSpaceSymbol = lexemeComponents.get(4);
-        Assert.assertNotEquals(testWord, thirdSpaceSymbol);
+        Assert.assertEquals(mathExpression,actualLexeme);
+    }
 
-        TextComponent actualTestWord = lexemeComponents.get(5);
-        Assert.assertNotEquals(space,actualTestWord);
+    @Test
+    public void shouldMathExpressionParsingFailed(){
+        String currentMathContent = "2+2*45";
+        Lexeme actualLexeme = (Lexeme) lexemeParser.parseTextComponent(currentMathContent);
 
-
+        Assert.assertNotEquals(mathExpression,actualLexeme);
     }
 }

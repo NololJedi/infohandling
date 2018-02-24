@@ -27,7 +27,7 @@ public class SentenceParser implements Parser {
         TextComposite sentence = new TextComposite();
         sentence.setComponentType(ComponentType.SENTENCE);
 
-        setNextParser(WordParser.getInstance());
+        setNextParser(LexemeParser.getInstance());
         String firstWordContent = wordInjector(content);
         TextComponent firstWord = nextParser.parseTextComponent(firstWordContent);
         sentence.addTextComponent(firstWord);
