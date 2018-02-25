@@ -12,16 +12,17 @@ public class TextFileReader {
         if (filePath == null || filePath.isEmpty()) {
             throw new IllegalArgumentException("Incorrect file path.");
         }
-        try (FileReader fileReader = new FileReader(filePath);
-             BufferedReader textReader = new BufferedReader(fileReader)) {
+        try (FileReader fileReader = new FileReader(filePath)) {
             StringBuilder text = new StringBuilder();
 
-            while (textReader.ready()) {
-                String line = textReader.readLine();
-                text.append(line);
+            while (fileReader.ready()) {
+                char symbol = (char)fileReader.read();
+                text.append(symbol);
             }
 
-            return text.toString();
+            String result = text.toString();
+            result = result.replaceAll("\r","");
+            return result;
         } catch (IOException exception) {
             throw new IncorrectFileException("Incorrect file.", exception);
         }

@@ -14,7 +14,7 @@ public class TextComposite implements TextComponent {
             throw new IllegalArgumentException("Incorrect input component inputType.");
         }
 
-        List<TextComponent> components = new ArrayList<TextComponent>();
+        List<TextComponent> components = new ArrayList<>();
         for (TextComponent currentComponent : textComponents) {
             ComponentType currentComponentType = currentComponent.getComponentType();
             if (currentComponentType == inputType) {
