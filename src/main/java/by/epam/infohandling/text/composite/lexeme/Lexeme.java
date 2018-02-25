@@ -37,8 +37,14 @@ public class Lexeme extends TextComposite {
         if (!super.equals(object)) {
             return false;
         }
+
         Lexeme lexeme = (Lexeme) object;
-        return lexemeType == lexeme.lexemeType;
+
+        if (lexemeType != lexeme.lexemeType) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override

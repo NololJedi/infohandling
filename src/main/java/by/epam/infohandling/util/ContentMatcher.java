@@ -5,7 +5,11 @@ import java.util.regex.Pattern;
 
 public class ContentMatcher {
 
+    public static final int LAST_ELEMENT_IDENTIFIER = 1;
     public static final int SYMBOL_LENGTH = 1;
+
+    public static final String SPACE = " ";
+    public static final String EMPTY_SYMBOL = "";
 
     public static final String SYMBOL_ALPHABET_PATTERN = "[a-zA-z]";
     public static final String SYMBOL_NUMBER_PATTERN = "[0-9]";

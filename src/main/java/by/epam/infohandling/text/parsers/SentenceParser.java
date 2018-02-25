@@ -3,12 +3,9 @@ package by.epam.infohandling.text.parsers;
 import by.epam.infohandling.text.composite.*;
 import by.epam.infohandling.util.ContentMatcher;
 
-import static by.epam.infohandling.util.ContentMatcher.SYMBOL_PUNCTUATION_PATTERN;
+import static by.epam.infohandling.util.ContentMatcher.*;
 
 public class SentenceParser implements Parser {
-
-    private static final String LEXEME_SPLIT_IDENTIFIER = " ";
-    private static final int LAST_LEXEME_IDENTIFIER = 1;
 
     private static SentenceParser sentenceParser = null;
 
@@ -37,8 +34,8 @@ public class SentenceParser implements Parser {
 
         setNextParser(LexemeParser.getInstance());
 
-        String[] lexemes = content.split(LEXEME_SPLIT_IDENTIFIER);
-        Symbol space = new Symbol(LEXEME_SPLIT_IDENTIFIER, SymbolType.PUNCTUATION);
+        String[] lexemes = content.split(SPACE);
+        Symbol space = new Symbol(SPACE, SymbolType.PUNCTUATION);
 
         for (int arrayIndex = 0; arrayIndex < lexemes.length; arrayIndex++) {
             String currentContent = lexemes[arrayIndex];
@@ -48,7 +45,7 @@ public class SentenceParser implements Parser {
 
             boolean isLastSymbolPunctuation = ContentMatcher.contentMatch(lastSymbol, SYMBOL_PUNCTUATION_PATTERN);
             if (isLastSymbolPunctuation) {
-                currentContent = currentContent.replace(lastSymbol, "");
+                currentContent = currentContent.replace(lastSymbol, EMPTY_SYMBOL);
 
                 TextComponent word = nextParser.parseTextComponent(currentContent);
                 sentence.addTextComponent(word);
@@ -59,7 +56,7 @@ public class SentenceParser implements Parser {
                 TextComponent currentComponent = nextParser.parseTextComponent(currentContent);
                 sentence.addTextComponent(currentComponent);
             }
-            if (arrayIndex != lexemes.length - LAST_LEXEME_IDENTIFIER) {
+            if (arrayIndex != lexemes.length - LAST_ELEMENT_IDENTIFIER) {
                 sentence.addTextComponent(space);
             }
         }

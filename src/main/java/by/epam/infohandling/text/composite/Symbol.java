@@ -45,8 +45,15 @@ public class Symbol implements TextComponent {
             return false;
         }
         Symbol symbol = (Symbol) object;
-        return Objects.equals(content, symbol.content) &&
-                symbolType == symbol.symbolType;
+
+        if (!content.equals(symbol.content)) {
+            return false;
+        }
+        if (symbolType != symbol.symbolType) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override

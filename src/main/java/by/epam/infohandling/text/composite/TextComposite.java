@@ -89,8 +89,15 @@ public class TextComposite implements TextComponent {
             return false;
         }
         TextComposite that = (TextComposite) object;
-        return Objects.equals(textComponents, that.textComponents) &&
-                componentType == that.componentType;
+
+        if (!textComponents.equals(that.textComponents)) {
+            return false;
+        }
+        if (componentType != that.componentType) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
