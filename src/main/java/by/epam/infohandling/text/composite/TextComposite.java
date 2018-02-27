@@ -29,14 +29,6 @@ public class TextComposite implements TextComponent {
         }
     }
 
-    public void addTextComponent(TextComponent textComponent) {
-        if (textComponent == null) {
-            throw new IllegalArgumentException("Incorrect input text component.");
-        }
-
-        this.textComponents.add(textComponent);
-    }
-
     public void removeTextComponent(TextComponent textComponent) {
         if (textComponent == null) {
             throw new IllegalArgumentException("Incorrect input text component.");
@@ -49,6 +41,17 @@ public class TextComposite implements TextComponent {
         }
     }
 
+    public void removeLastTextComponent(){
+        if (textComponents.isEmpty()){
+            throw new IllegalArgumentException("Components are empty.");
+        }
+
+        int currentSize = textComponents.size();
+        int lastComponentIndex = currentSize - 1;
+
+        textComponents.remove(lastComponentIndex);
+    }
+
     public void setComponentType(ComponentType componentType) {
         if (componentType == null) {
             throw new IllegalArgumentException("Incorrect input component type.");
@@ -57,6 +60,16 @@ public class TextComposite implements TextComponent {
         this.componentType = componentType;
     }
 
+    @Override
+    public void addTextComponent(TextComponent textComponent) {
+        if (textComponent == null) {
+            throw new IllegalArgumentException("Incorrect input text component.");
+        }
+
+        this.textComponents.add(textComponent);
+    }
+
+    @Override
     public List<TextComponent> getTextComponents() {
         return textComponents;
     }

@@ -22,8 +22,8 @@ public class SymbolParserTest {
     private static SymbolParser symbolParser;
 
     @BeforeClass
-    public static void setSymbolParser() {
-        symbolParser = SymbolParser.getInstance();
+    public static void setSymbolParser(){
+        symbolParser = new SymbolParser();
     }
 
     @Test
@@ -31,33 +31,13 @@ public class SymbolParserTest {
         List<TextComponent> components = getComponents(ALPHABET_CONTENT);
 
         Symbol firstSymbol = (Symbol) components.get(0);
-        SymbolType firstSymbolType = firstSymbol.getSymbolType();
-        Assert.assertEquals(ALPHABET, firstSymbolType);
+        checkSymbol(firstSymbol, ALPHABET, "a");
 
         Symbol secondSymbol = (Symbol) components.get(1);
-        SymbolType secondSymbolType = secondSymbol.getSymbolType();
-        Assert.assertEquals(ALPHABET, secondSymbolType);
+        checkSymbol(secondSymbol, ALPHABET, "b");
 
         Symbol thirdSymbol = (Symbol) components.get(2);
-        SymbolType thirdSymbolType = thirdSymbol.getSymbolType();
-        Assert.assertEquals(ALPHABET, thirdSymbolType);
-    }
-
-    @Test
-    public void shouldAlphabetContentParsingFailed() {
-        List<TextComponent> components = getComponents(ALPHABET_CONTENT);
-
-        Symbol firstSymbol = (Symbol) components.get(0);
-        SymbolType firstSymbolType = firstSymbol.getSymbolType();
-        Assert.assertNotEquals(MATH, firstSymbolType);
-
-        Symbol secondSymbol = (Symbol) components.get(1);
-        SymbolType secondSymbolType = secondSymbol.getSymbolType();
-        Assert.assertNotEquals(PUNCTUATION, secondSymbolType);
-
-        Symbol thirdSymbol = (Symbol) components.get(2);
-        SymbolType thirdSymbolType = thirdSymbol.getSymbolType();
-        Assert.assertNotEquals(NUMBER, thirdSymbolType);
+        checkSymbol(thirdSymbol, ALPHABET, "S");
 
     }
 
@@ -66,57 +46,22 @@ public class SymbolParserTest {
         List<TextComponent> components = getComponents(MATH_CONTENT);
 
         Symbol firstSymbol = (Symbol) components.get(0);
-        SymbolType firstSymbolType = firstSymbol.getSymbolType();
-        Assert.assertEquals(MATH, firstSymbolType);
+        checkSymbol(firstSymbol, MATH, "-");
 
         Symbol secondSymbol = (Symbol) components.get(1);
-        SymbolType secondSymbolType = secondSymbol.getSymbolType();
-        Assert.assertEquals(MATH, secondSymbolType);
+        checkSymbol(secondSymbol, MATH, "(");
 
         Symbol thirdSymbol = (Symbol) components.get(2);
-        SymbolType thirdSymbolType = thirdSymbol.getSymbolType();
-        Assert.assertEquals(MATH, thirdSymbolType);
+        checkSymbol(thirdSymbol, MATH, ")");
 
         Symbol fourthSymbol = (Symbol) components.get(3);
-        SymbolType fourthSymbolType = fourthSymbol.getSymbolType();
-        Assert.assertEquals(MATH, fourthSymbolType);
+        checkSymbol(fourthSymbol, MATH, "*");
 
         Symbol fifthSymbol = (Symbol) components.get(4);
-        SymbolType fifthSymbolType = fifthSymbol.getSymbolType();
-        Assert.assertEquals(MATH, fifthSymbolType);
+        checkSymbol(fifthSymbol, MATH, "+");
 
         Symbol sixSymbol = (Symbol) components.get(5);
-        SymbolType sixSymbolType = sixSymbol.getSymbolType();
-        Assert.assertEquals(MATH, sixSymbolType);
-    }
-
-    @Test
-    public void shouldMathContentParsingFailed() {
-        List<TextComponent> components = getComponents(MATH_CONTENT);
-
-        Symbol firstSymbol = (Symbol) components.get(0);
-        SymbolType firstSymbolType = firstSymbol.getSymbolType();
-        Assert.assertNotEquals(ALPHABET, firstSymbolType);
-
-        Symbol secondSymbol = (Symbol) components.get(1);
-        SymbolType secondSymbolType = secondSymbol.getSymbolType();
-        Assert.assertNotEquals(NUMBER, secondSymbolType);
-
-        Symbol thirdSymbol = (Symbol) components.get(2);
-        SymbolType thirdSymbolType = thirdSymbol.getSymbolType();
-        Assert.assertNotEquals(ALPHABET, thirdSymbolType);
-
-        Symbol fourthSymbol = (Symbol) components.get(3);
-        SymbolType fourthSymbolType = fourthSymbol.getSymbolType();
-        Assert.assertNotEquals(PUNCTUATION, fourthSymbolType);
-
-        Symbol fifthSymbol = (Symbol) components.get(4);
-        SymbolType fifthSymbolType = fifthSymbol.getSymbolType();
-        Assert.assertNotEquals(NUMBER, fifthSymbolType);
-
-        Symbol sixSymbol = (Symbol) components.get(5);
-        SymbolType sixSymbolType = sixSymbol.getSymbolType();
-        Assert.assertNotEquals(ALPHABET, sixSymbolType);
+        checkSymbol(sixSymbol, MATH, "/");
     }
 
     @Test
@@ -124,49 +69,19 @@ public class SymbolParserTest {
         List<TextComponent> components = getComponents(NUMBER_CONTENT);
 
         Symbol firstSymbol = (Symbol) components.get(0);
-        SymbolType firstSymbolType = firstSymbol.getSymbolType();
-        Assert.assertEquals(NUMBER, firstSymbolType);
+        checkSymbol(firstSymbol, NUMBER, "1");
 
         Symbol secondSymbol = (Symbol) components.get(1);
-        SymbolType secondSymbolType = secondSymbol.getSymbolType();
-        Assert.assertEquals(NUMBER, secondSymbolType);
+        checkSymbol(secondSymbol, NUMBER, "2");
 
         Symbol thirdSymbol = (Symbol) components.get(2);
-        SymbolType thirdSymbolType = thirdSymbol.getSymbolType();
-        Assert.assertEquals(NUMBER, thirdSymbolType);
+        checkSymbol(thirdSymbol, NUMBER, "3");
 
         Symbol fourthSymbol = (Symbol) components.get(3);
-        SymbolType fourthSymbolType = fourthSymbol.getSymbolType();
-        Assert.assertEquals(NUMBER, fourthSymbolType);
+        checkSymbol(fourthSymbol, NUMBER, "4");
 
         Symbol fifthSymbol = (Symbol) components.get(4);
-        SymbolType fifthSymbolType = fifthSymbol.getSymbolType();
-        Assert.assertEquals(NUMBER, fifthSymbolType);
-    }
-
-    @Test
-    public void shouldNumberContentParsingFailed() {
-        List<TextComponent> components = getComponents(NUMBER_CONTENT);
-
-        Symbol firstSymbol = (Symbol) components.get(0);
-        SymbolType firstSymbolType = firstSymbol.getSymbolType();
-        Assert.assertNotEquals(ALPHABET, firstSymbolType);
-
-        Symbol secondSymbol = (Symbol) components.get(1);
-        SymbolType secondSymbolType = secondSymbol.getSymbolType();
-        Assert.assertNotEquals(MATH, secondSymbolType);
-
-        Symbol thirdSymbol = (Symbol) components.get(2);
-        SymbolType thirdSymbolType = thirdSymbol.getSymbolType();
-        Assert.assertNotEquals(ALPHABET, thirdSymbolType);
-
-        Symbol fourthSymbol = (Symbol) components.get(3);
-        SymbolType fourthSymbolType = fourthSymbol.getSymbolType();
-        Assert.assertNotEquals(PUNCTUATION, fourthSymbolType);
-
-        Symbol fifthSymbol = (Symbol) components.get(4);
-        SymbolType fifthSymbolType = fifthSymbol.getSymbolType();
-        Assert.assertNotEquals(MATH, fifthSymbolType);
+        checkSymbol(fifthSymbol, NUMBER, "5");
     }
 
     @Test
@@ -174,49 +89,28 @@ public class SymbolParserTest {
         List<TextComponent> components = getComponents(PUNCTUATION_CONTENT);
 
         Symbol firstSymbol = (Symbol) components.get(0);
-        SymbolType firstSymbolType = firstSymbol.getSymbolType();
-        Assert.assertEquals(PUNCTUATION, firstSymbolType);
+        checkSymbol(firstSymbol, PUNCTUATION, ",");
 
         Symbol secondSymbol = (Symbol) components.get(1);
-        SymbolType secondSymbolType = secondSymbol.getSymbolType();
-        Assert.assertEquals(PUNCTUATION, secondSymbolType);
+        checkSymbol(secondSymbol, PUNCTUATION, ".");
 
         Symbol thirdSymbol = (Symbol) components.get(2);
-        SymbolType thirdSymbolType = thirdSymbol.getSymbolType();
-        Assert.assertEquals(PUNCTUATION, thirdSymbolType);
+        checkSymbol(thirdSymbol, PUNCTUATION, "?");
 
         Symbol fourthSymbol = (Symbol) components.get(3);
-        SymbolType fourthSymbolType = fourthSymbol.getSymbolType();
-        Assert.assertEquals(PUNCTUATION, fourthSymbolType);
+        checkSymbol(fourthSymbol, PUNCTUATION, "!");
 
         Symbol fifthSymbol = (Symbol) components.get(4);
-        SymbolType fifthSymbolType = fifthSymbol.getSymbolType();
-        Assert.assertEquals(PUNCTUATION, fifthSymbolType);
+        checkSymbol(fifthSymbol, PUNCTUATION, " ");
     }
 
-    @Test
-    public void shouldPunctuationContentParsingFailed() {
-        List<TextComponent> components = getComponents(PUNCTUATION_CONTENT);
 
-        Symbol firstSymbol = (Symbol) components.get(0);
-        SymbolType firstSymbolType = firstSymbol.getSymbolType();
-        Assert.assertNotEquals(ALPHABET, firstSymbolType);
+    private void checkSymbol(Symbol symbol, SymbolType expectedType, String expectedContent) {
+        SymbolType actualSymbolType = symbol.getSymbolType();
+        Assert.assertEquals(expectedType, actualSymbolType);
 
-        Symbol secondSymbol = (Symbol) components.get(1);
-        SymbolType secondSymbolType = secondSymbol.getSymbolType();
-        Assert.assertNotEquals(MATH, secondSymbolType);
-
-        Symbol thirdSymbol = (Symbol) components.get(2);
-        SymbolType thirdSymbolType = thirdSymbol.getSymbolType();
-        Assert.assertNotEquals(ALPHABET, thirdSymbolType);
-
-        Symbol fourthSymbol = (Symbol) components.get(3);
-        SymbolType fourthSymbolType = fourthSymbol.getSymbolType();
-        Assert.assertNotEquals(NUMBER, fourthSymbolType);
-
-        Symbol fifthSymbol = (Symbol) components.get(4);
-        SymbolType fifthSymbolType = fifthSymbol.getSymbolType();
-        Assert.assertNotEquals(MATH, fifthSymbolType);
+        String actualContent = symbol.getContent();
+        Assert.assertEquals(expectedContent, actualContent);
     }
 
     private List<TextComponent> getComponents(String content) {
@@ -225,4 +119,5 @@ public class SymbolParserTest {
 
         return components;
     }
+
 }

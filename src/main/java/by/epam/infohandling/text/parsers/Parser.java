@@ -2,8 +2,13 @@ package by.epam.infohandling.text.parsers;
 
 import by.epam.infohandling.text.composite.TextComponent;
 
-public interface Parser {
+public abstract class Parser {
 
-    TextComponent parseTextComponent(String content);
+    protected Parser nextParser;
 
+    public abstract TextComponent parseTextComponent(String content);
+
+    public void setNextParser(Parser nextParser) {
+        this.nextParser = nextParser;
+    }
 }

@@ -7,19 +7,11 @@ import by.epam.infohandling.text.composite.TextComposite;
 
 import static by.epam.infohandling.util.ContentMatcher.*;
 
-public class SymbolParser implements Parser {
+public class SymbolParser extends Parser {
 
-    private static SymbolParser symbolParser = null;
-
-    private SymbolParser() {
-    }
-
-    public static SymbolParser getInstance() {
-        if (symbolParser == null) {
-            symbolParser = new SymbolParser();
-        }
-
-        return symbolParser;
+    @Override
+    public void setNextParser(Parser nextParser) {
+        throw new UnsupportedOperationException("Final parser of chain. Operation not supported.");
     }
 
     @Override

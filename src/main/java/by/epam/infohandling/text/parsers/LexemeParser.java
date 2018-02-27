@@ -10,31 +10,17 @@ import by.epam.infohandling.util.ContentMatcher;
 import static by.epam.infohandling.util.ContentMatcher.LEXEME_WORD_PATTERN;
 import static by.epam.infohandling.util.ContentMatcher.SYMBOL_LENGTH;
 
-public class LexemeParser implements Parser {
-
-    private static LexemeParser lexemeParser = null;
-
-    private Parser nextParser;
-
-    private LexemeParser() {
-    }
-
-    public static LexemeParser getInstance() {
-        if (lexemeParser == null) {
-            lexemeParser = new LexemeParser();
-        }
-
-        return lexemeParser;
-    }
+public class LexemeParser extends Parser {
 
     @Override
     public TextComponent parseTextComponent(String content) {
         if (content == null || content.isEmpty()) {
             throw new IllegalArgumentException("Incorrect content.");
         }
+        if (nextParser == null){
+            throw new IllegalArgumentException("Incorrect parser detected.");
+        }
         Lexeme lexeme = new Lexeme();
-
-        setNextParser(SymbolParser.getInstance());
 
         if (content.length() == SYMBOL_LENGTH) {
             Symbol symbol = (Symbol) nextParser.parseTextComponent(content);
@@ -67,7 +53,4 @@ public class LexemeParser implements Parser {
         return lexeme;
     }
 
-    private void setNextParser(Parser nextParser) {
-        this.nextParser = nextParser;
-    }
 }

@@ -4,6 +4,9 @@ import by.epam.infohandling.exceptions.IncorrectFileException;
 import by.epam.infohandling.text.composite.ComponentType;
 import by.epam.infohandling.text.composite.TextComponent;
 import by.epam.infohandling.text.composite.TextComposite;
+import by.epam.infohandling.text.parsers.LexemeParser;
+import by.epam.infohandling.text.parsers.ParagraphParser;
+import by.epam.infohandling.text.parsers.SentenceParser;
 import by.epam.infohandling.text.parsers.TextParser;
 import by.epam.infohandling.util.TextFileReader;
 
@@ -17,7 +20,8 @@ public class InfoHandlingProcessor {
 
         System.out.println(content);
 
-        TextParser textParser = TextParser.getInstance();
+        TextParser textParser = new TextParser();
+        textParser.setNextParser(new ParagraphParser());
 
         TextComposite text = (TextComposite) textParser.parseTextComponent(content);
         List<TextComponent> components = text.getTextComponentsByType(ComponentType.PARAGRAPH);

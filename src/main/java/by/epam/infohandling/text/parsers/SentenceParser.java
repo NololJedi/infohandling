@@ -5,23 +5,7 @@ import by.epam.infohandling.util.ContentMatcher;
 
 import static by.epam.infohandling.util.ContentMatcher.*;
 
-public class SentenceParser implements Parser {
-
-    private static SentenceParser sentenceParser = null;
-
-    private Parser nextParser;
-
-    private SentenceParser() {
-    }
-
-    public static SentenceParser getInstance() {
-
-        if (sentenceParser == null) {
-            sentenceParser = new SentenceParser();
-        }
-
-        return sentenceParser;
-    }
+public class SentenceParser extends Parser {
 
     @Override
     public TextComponent parseTextComponent(String content) {
@@ -32,8 +16,6 @@ public class SentenceParser implements Parser {
         TextComposite sentence = new TextComposite();
         sentence.setComponentType(ComponentType.SENTENCE);
 
-        setNextParser(LexemeParser.getInstance());
-
         String[] lexemes = content.split(SPACE);
         Symbol space = new Symbol(SPACE, SymbolType.PUNCTUATION);
 
@@ -41,7 +23,8 @@ public class SentenceParser implements Parser {
             String currentContent = lexemes[arrayIndex];
 
             int lastSymbolIdentifier = currentContent.length() - 1;
-            String lastSymbol = String.valueOf(currentContent.charAt(lastSymbolIdentifier));
+            char lastChar = currentContent.charAt(lastSymbolIdentifier);
+            String lastSymbol = String.valueOf(lastChar);
 
             boolean isLastSymbolPunctuation = ContentMatcher.contentMatch(lastSymbol, SYMBOL_PUNCTUATION_PATTERN);
             if (isLastSymbolPunctuation) {
@@ -62,10 +45,6 @@ public class SentenceParser implements Parser {
         }
 
         return sentence;
-    }
-
-    private void setNextParser(Parser nextParser) {
-        this.nextParser = nextParser;
     }
 
 }

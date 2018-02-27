@@ -1,5 +1,6 @@
 package by.epam.infohandling.text.composite;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Symbol implements TextComponent {
@@ -16,14 +17,6 @@ public class Symbol implements TextComponent {
         this.symbolType = symbolType;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public ComponentType getComponentType() {
-        return ComponentType.SYMBOL;
-    }
-
     public SymbolType getSymbolType() {
         return symbolType;
     }
@@ -34,6 +27,26 @@ public class Symbol implements TextComponent {
         }
 
         this.symbolType = symbolType;
+    }
+
+    @Override
+    public List<TextComponent> getTextComponents() {
+        throw new UnsupportedOperationException("getTextComponents operation doesn't allow in that class.");
+    }
+
+    @Override
+    public void addTextComponent(TextComponent textComponent) {
+        throw new UnsupportedOperationException("Add operation doesn't allow in that class.");
+    }
+
+    @Override
+    public String getContent() {
+        return content;
+    }
+
+    @Override
+    public ComponentType getComponentType() {
+        return ComponentType.SYMBOL;
     }
 
     @Override
