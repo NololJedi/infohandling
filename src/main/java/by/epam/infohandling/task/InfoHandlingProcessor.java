@@ -20,6 +20,7 @@ public class InfoHandlingProcessor {
 
         System.out.println(content);
 
+
         TextParser textParser = new TextParser();
         textParser.setNextParser(new ParagraphParser());
 

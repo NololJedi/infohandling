@@ -1,8 +1,7 @@
 package by.epam.infohandling.text.parsers;
 
-import by.epam.infohandling.text.composite.Symbol;
 import by.epam.infohandling.text.composite.TextComposite;
-import by.epam.infohandling.text.composite.lexeme.Lexeme;
+import by.epam.infohandling.text.composite.Lexeme;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -76,7 +75,7 @@ public class SentenceParserTest {
         when(lexemeParser.parseTextComponent(".")).thenReturn(dotSymbol);
 
         sentenceParser.setNextParser(lexemeParser);
-        TextComposite actualSentence = (TextComposite) sentenceParser.parseTextComponent(SENTENCE_CONTENT_EXAMPLE);
+        TextComposite actualSentence = (TextComposite)sentenceParser.parseTextComponent(SENTENCE_CONTENT_EXAMPLE);
         String content = actualSentence.getContent();
 
         Assert.assertEquals("Dog eat a bone, cat 3*3+(3*3) milk.", content);

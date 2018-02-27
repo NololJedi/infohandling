@@ -9,14 +9,11 @@ public class ContentMatcher {
     public static final int SYMBOL_LENGTH = 1;
 
     public static final String SPACE = " ";
-    public static final String EMPTY_SYMBOL = "";
 
-    public static final String SYMBOL_ALPHABET_PATTERN = "[a-zA-z]";
-    public static final String SYMBOL_NUMBER_PATTERN = "[0-9]";
-    public static final String SYMBOL_MATH_PATTERN = "-|\\(|\\)|\\*|[+]|/";
-    public static final String SYMBOL_PUNCTUATION_PATTERN = "\\s|\\.|,|!|\\?";
-
-    public static final String LEXEME_WORD_PATTERN = "^[a-zA-Z]+[\\.,!\\?]?";
+    public static final String ALPHABET_PATTERN = "[a-zA-z]";
+    public static final String NUMBER_PATTERN = "\\d+";
+    public static final String PUNCTUATION_PATTERN = "\\s|\\.|,|!|\\?";
+    public static final String WORD_PATTERN = "^[a-zA-Z]+[\\.,!\\?]?";
 
     public static boolean contentMatch(String content, String pattern) {
         if (content == null || content.isEmpty()) {

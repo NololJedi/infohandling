@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class TextComposite implements TextComponent {
+public class TextComposite extends TextComponent {
 
     private List<TextComponent> textComponents = new ArrayList<TextComponent>();
     private ComponentType componentType;
@@ -52,15 +52,6 @@ public class TextComposite implements TextComponent {
         textComponents.remove(lastComponentIndex);
     }
 
-    public void setComponentType(ComponentType componentType) {
-        if (componentType == null) {
-            throw new IllegalArgumentException("Incorrect input component type.");
-        }
-
-        this.componentType = componentType;
-    }
-
-    @Override
     public void addTextComponent(TextComponent textComponent) {
         if (textComponent == null) {
             throw new IllegalArgumentException("Incorrect input text component.");
@@ -69,14 +60,8 @@ public class TextComposite implements TextComponent {
         this.textComponents.add(textComponent);
     }
 
-    @Override
     public List<TextComponent> getTextComponents() {
         return textComponents;
-    }
-
-    @Override
-    public ComponentType getComponentType() {
-        return this.componentType;
     }
 
     @Override

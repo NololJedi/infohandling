@@ -1,14 +1,9 @@
 package by.epam.infohandling.text.parsers;
 
-import by.epam.infohandling.text.composite.Symbol;
-import by.epam.infohandling.text.composite.SymbolType;
-import by.epam.infohandling.text.composite.TextComponent;
 import by.epam.infohandling.text.composite.TextComposite;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.List;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

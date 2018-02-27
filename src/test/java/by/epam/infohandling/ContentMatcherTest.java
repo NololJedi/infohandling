@@ -24,13 +24,13 @@ public class ContentMatcherTest {
         String mathExpression = "6+9*(3-4)";
 
         return new Object[][]{
-                {letter, SYMBOL_ALPHABET_PATTERN, true},
-                {number, SYMBOL_NUMBER_PATTERN, true},
-                {math, SYMBOL_MATH_PATTERN, true},
-                {punctuation, SYMBOL_PUNCTUATION_PATTERN, true},
-                {word, LEXEME_WORD_PATTERN, true},
-                {mathExpression, LEXEME_WORD_PATTERN, false},
-                {wordAndDot, LEXEME_WORD_PATTERN, true}
+                {letter, ALPHABET_PATTERN, true},
+                {number, NUMBER_PATTERN, true},
+                {math, MATH_PATTERN, true},
+                {punctuation, PUNCTUATION_PATTERN, true},
+                {word, WORD_PATTERN, true},
+                {mathExpression, WORD_PATTERN, false},
+                {wordAndDot, WORD_PATTERN, true}
         };
     }
 
@@ -45,13 +45,13 @@ public class ContentMatcherTest {
         String wordAndDot = "correct.asd";
 
         return new Object[][]{
-                {letter, SYMBOL_ALPHABET_PATTERN, true},
-                {number, SYMBOL_ALPHABET_PATTERN, true},
-                {math, SYMBOL_MATH_PATTERN, true},
-                {punctuation, SYMBOL_PUNCTUATION_PATTERN, true},
-                {word, LEXEME_WORD_PATTERN, true},
-                {mathExpression, LEXEME_WORD_PATTERN, false},
-                {wordAndDot, LEXEME_WORD_PATTERN, true}
+                {letter, ALPHABET_PATTERN, true},
+                {number, ALPHABET_PATTERN, true},
+                {math, MATH_PATTERN, true},
+                {punctuation, PUNCTUATION_PATTERN, true},
+                {word, WORD_PATTERN, true},
+                {mathExpression, WORD_PATTERN, false},
+                {wordAndDot, WORD_PATTERN, true}
         };
     }
 
@@ -65,8 +65,8 @@ public class ContentMatcherTest {
         String content = "A";
 
         return new Object[][]{
-                {nullContent, SYMBOL_ALPHABET_PATTERN},
-                {emptyContent, SYMBOL_ALPHABET_PATTERN},
+                {nullContent, ALPHABET_PATTERN},
+                {emptyContent, ALPHABET_PATTERN},
                 {content, nullPatter},
                 {content, emptyPattern}
         };

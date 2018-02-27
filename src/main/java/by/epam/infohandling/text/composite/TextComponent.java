@@ -1,15 +1,16 @@
 package by.epam.infohandling.text.composite;
 
-import java.util.List;
+public abstract class TextComponent {
 
-public interface TextComponent {
+    protected ComponentType componentType;
 
-    List<TextComponent> getTextComponents();
+    public ComponentType getComponentType() {
+        return componentType;
+    }
 
-    void addTextComponent(TextComponent textComponent);
+    public void setComponentType(ComponentType componentType) {
+        this.componentType = componentType;
+    }
 
-    String getContent();
-
-    ComponentType getComponentType();
-
+    public abstract String getContent();
 }

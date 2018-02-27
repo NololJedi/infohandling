@@ -7,6 +7,8 @@ import static by.epam.infohandling.util.ContentMatcher.*;
 
 public class SentenceParser extends Parser {
 
+    private static final String EMPTY_SYMBOL = "";
+
     @Override
     public TextComponent parseTextComponent(String content) {
         if (content == null || content.isEmpty()) {
@@ -15,9 +17,10 @@ public class SentenceParser extends Parser {
 
         TextComposite sentence = new TextComposite();
         sentence.setComponentType(ComponentType.SENTENCE);
+        TextComponent space = new PunctuationSymbol(SPACE);
 
         String[] lexemes = content.split(SPACE);
-        Symbol space = new Symbol(SPACE, SymbolType.PUNCTUATION);
+
 
         for (int arrayIndex = 0; arrayIndex < lexemes.length; arrayIndex++) {
             String currentContent = lexemes[arrayIndex];
@@ -26,14 +29,14 @@ public class SentenceParser extends Parser {
             char lastChar = currentContent.charAt(lastSymbolIdentifier);
             String lastSymbol = String.valueOf(lastChar);
 
-            boolean isLastSymbolPunctuation = ContentMatcher.contentMatch(lastSymbol, SYMBOL_PUNCTUATION_PATTERN);
+            boolean isLastSymbolPunctuation = ContentMatcher.contentMatch(lastSymbol, PUNCTUATION_PATTERN);
             if (isLastSymbolPunctuation) {
                 currentContent = currentContent.replace(lastSymbol, EMPTY_SYMBOL);
 
                 TextComponent word = nextParser.parseTextComponent(currentContent);
                 sentence.addTextComponent(word);
 
-                TextComponent punctuationSymbol = nextParser.parseTextComponent(lastSymbol);
+                TextComponent punctuationSymbol = new PunctuationSymbol(lastSymbol);
                 sentence.addTextComponent(punctuationSymbol);
             } else {
                 TextComponent currentComponent = nextParser.parseTextComponent(currentContent);

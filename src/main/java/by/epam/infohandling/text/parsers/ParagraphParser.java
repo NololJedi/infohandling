@@ -20,7 +20,7 @@ public class ParagraphParser extends Parser {
 
         TextComposite paragraph = new TextComposite();
         paragraph.setComponentType(ComponentType.PARAGRAPH);
-        Symbol space = new Symbol(SPACE, SymbolType.PUNCTUATION);
+        TextComponent space = new PunctuationSymbol(SPACE);
 
         Pattern pattern = Pattern.compile(SENTENCE_PATTERN);
         Matcher matcher = pattern.matcher(content);
