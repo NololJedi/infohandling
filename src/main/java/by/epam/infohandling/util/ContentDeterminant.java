@@ -14,10 +14,10 @@ public class ContentDeterminant {
     public static final int SYMBOL_LENGTH = 1;
     public static final String SPACE = " ";
 
-    public static final String ALPHABET_PATTERN = "[a-zA-z]";
+    public static final String ALPHABET_PATTERN = "[a-zA-z]{1}";
     public static final String NUMBER_PATTERN = "\\d+";
     public static final String PUNCTUATION_PATTERN = "\\s|\\.|,|!|\\?|-";
-    public static final String WORD_PATTERN = "[a-zA-Z\\-]+[\\.,!\\?]?";
+    public static final String WORD_PATTERN = "[a-zA-Z\\-]{2,}[\\.,!\\?]?";
     public static final String MATH_PATTERN = "((\\d+|[ij])[(\\\\d+\\+\\-\\*/\\\\d+|(ij)]*)+";
     public static final String SENTENCE_PATTERN = "[\\p{Upper}+\\-(](.(?!\\.))*..";
     public static final String PARAGRAPH_PATTERN = "\\t?[\\p{Upper}+\\-(](.(?!\\r?\\n\\r?\\n))*.";

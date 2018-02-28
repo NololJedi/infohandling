@@ -1,4 +1,4 @@
-package by.epam.infohandling.task;
+package by.epam.infohandling.run;
 
 import by.epam.infohandling.exceptions.IncorrectFileException;
 import by.epam.infohandling.text.composite.ComponentType;
@@ -8,18 +8,21 @@ import by.epam.infohandling.text.parsers.LexemeParser;
 import by.epam.infohandling.text.parsers.ParagraphParser;
 import by.epam.infohandling.text.parsers.SentenceParser;
 import by.epam.infohandling.text.parsers.TextParser;
-import by.epam.infohandling.util.ComponentInjector;
+import by.epam.infohandling.util.ComponentExtractor;
 import by.epam.infohandling.util.TextFileReader;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
 public class InfoHandlingProcessor {
 
+    private static final Logger LOGGER = Logger.getLogger(InfoHandlingProcessor.class);
+
+    private static final String fileName = "./src/main/resources/text.txt";
+
     public static void main(String[] args) throws IncorrectFileException {
 
         String content = new TextFileReader().readTextFromFile("./src/main/resources/text.txt");
-
-        System.out.println(content);
 
         LexemeParser lexemeParser = new LexemeParser();
         SentenceParser sentenceParser = new SentenceParser();
@@ -31,12 +34,10 @@ public class InfoHandlingProcessor {
         textParser.setNextParser(paragraphParser);
 
         TextComposite text = (TextComposite) textParser.parseTextComponent(content);
-        List<TextComponent> components = ComponentInjector.getComponentsByType(text,ComponentType.WORD);
 
-        for (TextComponent component : components) {
-            System.out.println("M " + component.getContent());
-        }
+       new SentencesWithSameWordsCalculator().startTask(text);
+       new LexemesCount().startTask(text);
+
 
     }
-
 }

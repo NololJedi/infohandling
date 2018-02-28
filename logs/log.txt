@@ -1,0 +1,125 @@
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:17 - Start calculating...
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:20 - Current count os sentences - 6.
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:31 - Checking sentence - It has survived - not only five centuries but also the leap into 13+i electronic typesetting remaining 3+5 essentially 6+9*(3-4) unchanged.
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:38 - Sentence hasn't same words.
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:31 - Checking sentence - It was popularised int the 9*(3-j) with the release of Letraset sheets containing Lorem Ipsum passages and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:35 - Sentence has same words.
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:31 - Checking sentence - It is a long establishing fact that a reader will be distracted by the readable content of a page when looking at its layout.
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:38 - Sentence hasn't same words.
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:31 - Checking sentence - The point of using i+9*(3-j)+i Ipsum is that it has a more-or-less normal distribution of letters as opposed to using content here making it look like readable English.
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:35 - Sentence has same words.
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:31 - Checking sentence - It is a i+9*(3-j)*1200 establishing fact that a reader will be of a page when looking at its layout.
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:38 - Sentence hasn't same words.
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:31 - Checking sentence - Bye.
+2018-02-28 19:37:28 INFO  SentencesWithSameWordsCalculator:38 - Sentence hasn't same words.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:17 - Start calculating...
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:20 - Current count os sentences - 6.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:29 - Checking sentence - It has survived - not only five centuries but also the leap into 13+i electronic typesetting remaining 3+5 essentially 6+9*(3-4) unchanged.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:36 - Sentence hasn't same words.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:29 - Checking sentence - It was popularised int the 9*(3-j) with the release of Letraset sheets containing Lorem Ipsum passages and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:33 - Sentence has same words.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:29 - Checking sentence - It is a long establishing fact that a reader will be distracted by the readable content of a page when looking at its layout.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:36 - Sentence hasn't same words.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:29 - Checking sentence - The point of using i+9*(3-j)+i Ipsum is that it has a more-or-less normal distribution of letters as opposed to using content here making it look like readable English.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:33 - Sentence has same words.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:29 - Checking sentence - It is a i+9*(3-j)*1200 establishing fact that a reader will be of a page when looking at its layout.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:36 - Sentence hasn't same words.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:29 - Checking sentence - Bye.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:36 - Sentence hasn't same words.
+2018-02-28 19:39:50 INFO  SentencesWithSameWordsCalculator:43 - Text has 2 sentences with same words.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:17 - Start calculating...
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:20 - Current count os sentences - 6.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:29 - Checking sentence - It has survived - not only five centuries but also the leap into 13+i electronic typesetting remaining 3+5 essentially 6+9*(3-4) unchanged.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:36 - Sentence hasn't same words.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:29 - Checking sentence - It was popularised in the 9*(3-j) with the release of Letraset sheets containing Lorem Ipsum passages and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:33 - Sentence has same words.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:29 - Checking sentence - It is a long establishing fact that a reader will be distracted by the readable content of a page when looking at its layout.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:36 - Sentence hasn't same words.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:29 - Checking sentence - The point of using i+9*(3-j)+i Ipsum is that it has a more-or-less normal distribution of letters as opposed to using content here making it look like readable English.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:33 - Sentence has same words.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:29 - Checking sentence - It is a i+9*(3-j)*1200 establishing fact that a reader will be of a page when looking at its layout.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:36 - Sentence hasn't same words.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:29 - Checking sentence - Bye.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:36 - Sentence hasn't same words.
+2018-02-28 19:40:27 INFO  SentencesWithSameWordsCalculator:43 - Text has 2 sentences with same words.
+2018-02-28 19:51:57 INFO  SentencesWithSameWordsCalculator:15 - Start run - Calculate count of sentences with same words.
+2018-02-28 19:51:57 INFO  SentencesWithSameWordsCalculator:18 - Current count os sentences - 6.
+2018-02-28 19:51:57 INFO  SentencesWithSameWordsCalculator:27 - Checking sentence - It has survived - not only five centuries, but also the leap into 13+i electronic typesetting, remaining 3+5 essentially 6+9*(3-4) unchanged..
+2018-02-28 19:51:58 INFO  SentencesWithSameWordsCalculator:34 - Sentence hasn't same words.
+2018-02-28 19:51:58 INFO  SentencesWithSameWordsCalculator:27 - Checking sentence - It was popularised in the 9*(3-j) with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum..
+2018-02-28 19:51:58 INFO  SentencesWithSameWordsCalculator:31 - Sentence has same words.
+2018-02-28 19:51:58 INFO  SentencesWithSameWordsCalculator:27 - Checking sentence - It is a long establishing fact that a reader will be distracted by the readable content of a page when looking at its layout..
+2018-02-28 19:51:58 INFO  SentencesWithSameWordsCalculator:34 - Sentence hasn't same words.
+2018-02-28 19:51:58 INFO  SentencesWithSameWordsCalculator:27 - Checking sentence - The point of using i+9*(3-j)+i Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using content here, making it look like readable English..
+2018-02-28 19:51:58 INFO  SentencesWithSameWordsCalculator:31 - Sentence has same words.
+2018-02-28 19:51:58 INFO  SentencesWithSameWordsCalculator:27 - Checking sentence - It is a i+9*(3-j)*1200 establishing fact that a reader will be of a page when looking at its layout..
+2018-02-28 19:51:58 INFO  SentencesWithSameWordsCalculator:34 - Sentence hasn't same words.
+2018-02-28 19:51:58 INFO  SentencesWithSameWordsCalculator:27 - Checking sentence - Bye..
+2018-02-28 19:51:58 INFO  SentencesWithSameWordsCalculator:34 - Sentence hasn't same words.
+2018-02-28 19:51:58 INFO  SentencesWithSameWordsCalculator:41 - Text has 2 sentences with same words.
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:19 - Start run - Calculate count of sentences with same words.
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:23 - Current count os sentences - 6.
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - It has survived - not only five centuries, but also the leap into 13+i electronic typesetting, remaining 3+5 essentially 6+9*(3-4) unchanged..
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:35 - Sentence hasn't same words.
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - It was popularised in the 9*(3-j) with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum..
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:32 - Sentence has same words.
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - It is a long establishing fact that a reader will be distracted by the readable content of a page when looking at its layout..
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:35 - Sentence hasn't same words.
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - The point of using i+9*(3-j)+i Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using content here, making it look like readable English..
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:32 - Sentence has same words.
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - It is a i+9*(3-j)*1200 establishing fact that a reader will be of a page when looking at its layout..
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:35 - Sentence hasn't same words.
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - Bye..
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:35 - Sentence hasn't same words.
+2018-02-28 20:20:27 INFO  SentencesWithSameWordsCalculator:43 - Text has 2 sentences with same words.
+2018-02-28 20:20:27 INFO  LexemesCount:23 - Start task - Print all sentences in ascending order of lexemes.
+2018-02-28 20:20:28 INFO  LexemesCount:184 - It was popularised in the 9*(3-j) with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.=31
+2018-02-28 20:20:28 INFO  LexemesCount:184 - The point of using i+9*(3-j)+i Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using content here, making it look like readable English.=28
+2018-02-28 20:20:28 INFO  LexemesCount:184 - It is a long establishing fact that a reader will be distracted by the readable content of a page when looking at its layout.=24
+2018-02-28 20:20:28 INFO  LexemesCount:184 - It has survived - not only five centuries, but also the leap into 13+i electronic typesetting, remaining 3+5 essentially 6+9*(3-4) unchanged.=20
+2018-02-28 20:20:28 INFO  LexemesCount:184 - It is a i+9*(3-j)*1200 establishing fact that a reader will be of a page when looking at its layout.=19
+2018-02-28 20:20:28 INFO  LexemesCount:184 - Bye.=1
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:19 - Start run - Calculate count of sentences with same words.
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:23 - Current count os sentences - 6.
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - It has survived - not only five centuries, but also the leap into 13+i electronic typesetting, remaining 3+5 essentially 6+9*(3-4) unchanged..
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:35 - Sentence hasn't same words.
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - It was popularised in the 9*(3-j) with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum..
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:32 - Sentence has same words.
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - It is a long establishing fact that a reader will be distracted by the readable content of a page when looking at its layout..
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:35 - Sentence hasn't same words.
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - The point of using i+9*(3-j)+i Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using content here, making it look like readable English..
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:32 - Sentence has same words.
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - It is a i+9*(3-j)*1200 establishing fact that a reader will be of a page when looking at its layout..
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:35 - Sentence hasn't same words.
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - Bye..
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:35 - Sentence hasn't same words.
+2018-02-28 20:21:59 INFO  SentencesWithSameWordsCalculator:43 - Text has 2 sentences with same words.
+2018-02-28 20:21:59 INFO  LexemesCount:23 - Start task - Print all sentences in ascending order of lexemes.
+2018-02-28 20:22:00 INFO  LexemesCount:184 - Bye.=1
+2018-02-28 20:22:00 INFO  LexemesCount:184 - It is a i+9*(3-j)*1200 establishing fact that a reader will be of a page when looking at its layout.=19
+2018-02-28 20:22:00 INFO  LexemesCount:184 - It has survived - not only five centuries, but also the leap into 13+i electronic typesetting, remaining 3+5 essentially 6+9*(3-4) unchanged.=20
+2018-02-28 20:22:00 INFO  LexemesCount:184 - It is a long establishing fact that a reader will be distracted by the readable content of a page when looking at its layout.=24
+2018-02-28 20:22:00 INFO  LexemesCount:184 - The point of using i+9*(3-j)+i Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using content here, making it look like readable English.=28
+2018-02-28 20:22:00 INFO  LexemesCount:184 - It was popularised in the 9*(3-j) with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.=31
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:19 - Start run - Calculate count of sentences with same words.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:23 - Current count os sentences - 6.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - It has survived - not only five centuries, but also the leap into 13+i electronic typesetting, remaining 3+5 essentially 6+9*(3-4) unchanged.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:35 - Sentence hasn't same words.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - It was popularised in the 9*(3-j) with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:32 - Sentence has same words.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - It is a long establishing fact that a reader will be distracted by the readable content of a page when looking at its layout.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:35 - Sentence hasn't same words.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - The point of using i+9*(3-j)+i Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using content here, making it look like readable English.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:32 - Sentence has same words.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - It is a i+9*(3-j)*1200 establishing fact that a reader will be of a page when looking at its layout.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:35 - Sentence hasn't same words.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:28 - Checking sentence - Bye.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:35 - Sentence hasn't same words.
+2018-02-28 20:24:16 INFO  SentencesWithSameWordsCalculator:43 - Text has 2 sentences with same words.
+2018-02-28 20:24:17 INFO  LexemesCount:24 - Start task - Print all sentences in ascending order of lexemes.
+2018-02-28 20:24:17 INFO  LexemesCount:184 - Bye.=1
+2018-02-28 20:24:17 INFO  LexemesCount:184 - It is a i+9*(3-j)*1200 establishing fact that a reader will be of a page when looking at its layout.=19
+2018-02-28 20:24:17 INFO  LexemesCount:184 - It has survived - not only five centuries, but also the leap into 13+i electronic typesetting, remaining 3+5 essentially 6+9*(3-4) unchanged.=20
+2018-02-28 20:24:17 INFO  LexemesCount:184 - It is a long establishing fact that a reader will be distracted by the readable content of a page when looking at its layout.=24
+2018-02-28 20:24:17 INFO  LexemesCount:184 - The point of using i+9*(3-j)+i Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using content here, making it look like readable English.=28
+2018-02-28 20:24:17 INFO  LexemesCount:184 - It was popularised in the 9*(3-j) with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.=31

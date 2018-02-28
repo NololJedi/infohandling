@@ -48,6 +48,9 @@ public class SentenceParser extends Parser {
 
                         TextComponent word = nextParser.parseTextComponent(currentContent);
                         sentence.addTextComponent(word);
+
+                        TextComponent punctuationSymbol = new PunctuationSymbol(lastSymbol);
+                        sentence.addTextComponent(punctuationSymbol);
                     }
 
                 } else {

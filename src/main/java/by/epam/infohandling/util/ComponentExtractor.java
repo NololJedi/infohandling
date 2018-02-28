@@ -7,9 +7,9 @@ import by.epam.infohandling.text.composite.TextComposite;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComponentInjector {
+public class ComponentExtractor {
 
-    public static List<TextComponent> getComponentsByType(TextComponent textComponent, ComponentType componentType) {
+    public static List<TextComponent> extractComponents(TextComponent textComponent, ComponentType componentType) {
         List<TextComponent> components = new ArrayList<>();
 
         List<TextComponent> currentComponents = textComponent.getTextComponents();
@@ -18,9 +18,9 @@ public class ComponentInjector {
             if (componentType.equals(currentType)) {
                 components.add(currentComponent);
             } else {
-                boolean isElementComposite = isElementComposite(currentComponent);
+                boolean isElementComposite = isObjectComposite(currentComponent);
                 if (isElementComposite) {
-                    components.addAll(getComponentsByType(currentComponent, componentType));
+                    components.addAll(extractComponents(currentComponent, componentType));
                 }
             }
         }
@@ -28,7 +28,7 @@ public class ComponentInjector {
         return components;
     }
 
-    private static boolean isElementComposite(TextComponent textComponent) {
+    private static boolean isObjectComposite(TextComponent textComponent) {
         Class currentClass = textComponent.getClass();
 
         return TextComposite.class.equals(currentClass);

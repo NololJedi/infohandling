@@ -77,7 +77,7 @@ public class ContentDeterminantTest {
     public void shouldTypeDeterminantBeSuccessful(String content, ComponentType expectedType) {
         ComponentType actualType = ContentDeterminant.determinantType(content);
 
-        Assert.assertEquals(actualType, expectedType);
+        Assert.assertEquals(expectedType, actualType);
     }
 
     @Test(expected = IllegalArgumentException.class)
