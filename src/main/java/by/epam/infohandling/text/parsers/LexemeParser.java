@@ -4,9 +4,9 @@ import by.epam.infohandling.text.composite.ComponentType;
 import by.epam.infohandling.text.composite.PunctuationSymbol;
 import by.epam.infohandling.text.composite.TextComponent;
 import by.epam.infohandling.text.composite.Lexeme;
-import by.epam.infohandling.util.ContentMatcher;
+import by.epam.infohandling.util.ContentDeterminant;
 
-import static by.epam.infohandling.util.ContentMatcher.*;
+import static by.epam.infohandling.util.ContentDeterminant.*;
 
 public class LexemeParser extends Parser {
 
@@ -22,9 +22,10 @@ public class LexemeParser extends Parser {
         }
 
         if (content.length() == SYMBOL_LENGTH) {
-            boolean isContentPunctuation = ContentMatcher.contentMatch(content,PUNCTUATION_PATTERN);
+            boolean isContentPunctuation = ContentDeterminant.matchContent(content,PUNCTUATION_PATTERN);
             if (isContentPunctuation){
                 PunctuationSymbol punctuationSymbol = new PunctuationSymbol(content);
+
                 return punctuationSymbol;
             }
         }
@@ -32,10 +33,8 @@ public class LexemeParser extends Parser {
         Lexeme lexeme = new Lexeme();
         lexeme.setContent(content);
 
-
-        boolean isLexemeTypeWord = ContentMatcher.contentMatch(content, WORD_PATTERN);
-
-
+        ComponentType lexemeType = ContentDeterminant.determinantType(content);
+        lexeme.setComponentType(lexemeType);
 
         return lexeme;
     }

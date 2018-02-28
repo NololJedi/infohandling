@@ -5,12 +5,10 @@ import by.epam.infohandling.text.composite.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static by.epam.infohandling.util.ContentMatcher.LAST_ELEMENT_IDENTIFIER;
-import static by.epam.infohandling.util.ContentMatcher.SPACE;
+import static by.epam.infohandling.util.ContentDeterminant.SENTENCE_PATTERN;
+import static by.epam.infohandling.util.ContentDeterminant.SPACE;
 
 public class ParagraphParser extends Parser {
-
-    private static final String SENTENCE_PATTERN = "[\\p{Upper}+\\-(](.(?!\\.))*..";
 
     @Override
     public TextComponent parseTextComponent(String content) {
@@ -18,22 +16,31 @@ public class ParagraphParser extends Parser {
             throw new IllegalArgumentException("Incorrect content.");
         }
 
-        TextComposite paragraph = new TextComposite();
-        paragraph.setComponentType(ComponentType.PARAGRAPH);
-        TextComponent space = new PunctuationSymbol(SPACE);
+        if (nextParser == null){
+            Lexeme paragraph = new Lexeme();
+            paragraph.setContent(content);
+            paragraph.setComponentType(ComponentType.PARAGRAPH);
 
-        Pattern pattern = Pattern.compile(SENTENCE_PATTERN);
-        Matcher matcher = pattern.matcher(content);
-        while (matcher.find()) {
-            String currentContent = matcher.group();
-            TextComposite sentence = (TextComposite) nextParser.parseTextComponent(currentContent);
+            return paragraph;
 
-            paragraph.addTextComponent(sentence);
-            paragraph.addTextComponent(space);
+        } else {
+            TextComposite paragraph = new TextComposite();
+            paragraph.setComponentType(ComponentType.PARAGRAPH);
+            TextComponent space = new PunctuationSymbol(SPACE);
+
+            Pattern pattern = Pattern.compile(SENTENCE_PATTERN);
+            Matcher matcher = pattern.matcher(content);
+            while (matcher.find()) {
+                String currentContent = matcher.group();
+                TextComponent sentence = nextParser.parseTextComponent(currentContent);
+
+                paragraph.addTextComponent(sentence);
+                paragraph.addTextComponent(space);
+            }
+
+            paragraph.removeLastTextComponent();
+            return paragraph;
         }
-
-        paragraph.removeLastTextComponent();
-        return paragraph;
     }
 
 }

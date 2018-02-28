@@ -5,9 +5,10 @@ import by.epam.infohandling.text.composite.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TextParser extends Parser {
+import static by.epam.infohandling.text.composite.ComponentType.TEXT;
+import static by.epam.infohandling.util.ContentDeterminant.PARAGRAPH_PATTERN;
 
-    private static final String PARAGRAPH_PATTERN = "\\t?[\\p{Upper}+\\-(](.(?!\\r?\\n\\r?\\n))*.";
+public class TextParser extends Parser {
 
     @Override
     public TextComponent parseTextComponent(String content) {
@@ -15,33 +16,42 @@ public class TextParser extends Parser {
             throw new IllegalArgumentException("Incorrect content.");
         }
 
-        TextComposite text = new TextComposite();
-        text.setComponentType(ComponentType.TEXT);
+        if (nextParser == null) {
+            Lexeme text = new Lexeme();
+            text.setContent(content);
+            text.setComponentType(TEXT);
 
-        Symbol newLine = new Symbol("\n\t", SymbolType.PUNCTUATION);
-        Symbol tabulation = new Symbol("\t", SymbolType.PUNCTUATION);
-        text.addTextComponent(tabulation);
+            return text;
 
-        Pattern pattern = Pattern.compile(PARAGRAPH_PATTERN);
-        Matcher matcher = pattern.matcher(content);
+        } else {
+            TextComposite text = new TextComposite();
+            text.setComponentType(ComponentType.TEXT);
 
-        int matcherGroupCount = matcher.groupCount();
-        if (matcherGroupCount <= 0) {
-            throw new IllegalArgumentException("Incorrect text format detected.");
+            TextComponent newLine = new PunctuationSymbol("\n\t");
+            TextComponent tabulation = new PunctuationSymbol("\t");
+            text.addTextComponent(tabulation);
+
+            Pattern pattern = Pattern.compile(PARAGRAPH_PATTERN);
+            Matcher matcher = pattern.matcher(content);
+
+            int matcherGroupCount = matcher.groupCount();
+            if (matcherGroupCount <= 0) {
+                throw new IllegalArgumentException("Incorrect text format detected.");
+            }
+
+            while (matcher.find()) {
+                String currentContent = matcher.group();
+                currentContent = currentContent.trim();
+
+                TextComponent paragraph = nextParser.parseTextComponent(currentContent);
+
+                text.addTextComponent(paragraph);
+                text.addTextComponent(newLine);
+            }
+
+            text.removeLastTextComponent();
+            return text;
         }
-
-        while (matcher.find()) {
-            String currentContent = matcher.group();
-            currentContent = currentContent.trim();
-
-            TextComposite paragraph = (TextComposite) nextParser.parseTextComponent(currentContent);
-
-            text.addTextComponent(paragraph);
-            text.addTextComponent(newLine);
-        }
-
-        text.removeLastTextComponent();
-        return text;
     }
 
 }

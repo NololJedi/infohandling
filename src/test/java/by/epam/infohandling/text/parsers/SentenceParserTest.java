@@ -1,7 +1,6 @@
 package by.epam.infohandling.text.parsers;
 
-import by.epam.infohandling.text.composite.TextComposite;
-import by.epam.infohandling.text.composite.Lexeme;
+import by.epam.infohandling.text.composite.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,70 +14,42 @@ public class SentenceParserTest {
 
     private static SentenceParser sentenceParser;
 
-    private static Lexeme wordDog;
-    private static Lexeme wordEat;
-    private static Lexeme article;
-    private static Lexeme wordBone;
-    private static Lexeme wordCat;
-    private static Lexeme wordMilk;
-    private static Lexeme mathExpression;
-    private static Symbol commaSymbol;
-    private static Symbol dotSymbol;
-
-    @BeforeClass
-    public static void setTestingObjects() {
-        wordDog = mock(Lexeme.class);
-        when(wordDog.getContent()).thenReturn("Dog");
-
-        wordEat = mock(Lexeme.class);
-        when(wordEat.getContent()).thenReturn("eat");
-
-        article = mock(Lexeme.class);
-        when(article.getContent()).thenReturn("a");
-
-        wordBone = mock(Lexeme.class);
-        when(wordBone.getContent()).thenReturn("bone");
-
-        wordCat = mock(Lexeme.class);
-        when(wordCat.getContent()).thenReturn("cat");
-
-        wordMilk = mock(Lexeme.class);
-        when(wordMilk.getContent()).thenReturn("milk");
-
-        mathExpression = mock(Lexeme.class);
-        when(mathExpression.getContent()).thenReturn("3*3+(3*3)");
-
-        dotSymbol = mock(Symbol.class);
-        when(dotSymbol.getContent()).thenReturn(".");
-
-        commaSymbol = mock(Symbol.class);
-        when(commaSymbol.getContent()).thenReturn(",");
-    }
-
     @BeforeClass
     public static void setSentenceParser() {
         sentenceParser = new SentenceParser();
     }
 
     @Test
-    public void shouldSentenceParsingBeSuccessful() {
+    public void shouldSentenceChainParsingBeSuccessful() {
 
         LexemeParser lexemeParser = mock(LexemeParser.class);
-        when(lexemeParser.parseTextComponent("Dog")).thenReturn(wordDog);
-        when(lexemeParser.parseTextComponent("eat")).thenReturn(wordEat);
-        when(lexemeParser.parseTextComponent("a")).thenReturn(article);
-        when(lexemeParser.parseTextComponent("bone")).thenReturn(wordBone);
-        when(lexemeParser.parseTextComponent("cat")).thenReturn(wordCat);
-        when(lexemeParser.parseTextComponent("3*3+(3*3)")).thenReturn(mathExpression);
-        when(lexemeParser.parseTextComponent("milk")).thenReturn(wordMilk);
-        when(lexemeParser.parseTextComponent(",")).thenReturn(commaSymbol);
-        when(lexemeParser.parseTextComponent(".")).thenReturn(dotSymbol);
+        when(lexemeParser.parseTextComponent("Dog")).thenReturn(new Lexeme("Dog", ComponentType.WORD));
+        when(lexemeParser.parseTextComponent("eat")).thenReturn(new Lexeme("eat", ComponentType.WORD));
+        when(lexemeParser.parseTextComponent("a")).thenReturn(new Lexeme("a", ComponentType.ALPHABET_SYMBOL));
+        when(lexemeParser.parseTextComponent("bone")).thenReturn(new Lexeme("bone", ComponentType.WORD));
+        when(lexemeParser.parseTextComponent("cat")).thenReturn(new Lexeme("cat", ComponentType.WORD));
+        when(lexemeParser.parseTextComponent("3*3+(3*3)")).thenReturn(new Lexeme("3*3+(3*3)", ComponentType.MATH_EXPRESSION));
+        when(lexemeParser.parseTextComponent("milk")).thenReturn(new Lexeme("milk", ComponentType.WORD));
+        when(lexemeParser.parseTextComponent(",")).thenReturn(new PunctuationSymbol(","));
+        when(lexemeParser.parseTextComponent(".")).thenReturn(new PunctuationSymbol("."));
 
         sentenceParser.setNextParser(lexemeParser);
-        TextComposite actualSentence = (TextComposite)sentenceParser.parseTextComponent(SENTENCE_CONTENT_EXAMPLE);
+        TextComposite actualSentence = (TextComposite) sentenceParser.parseTextComponent(SENTENCE_CONTENT_EXAMPLE);
         String content = actualSentence.getContent();
 
         Assert.assertEquals("Dog eat a bone, cat 3*3+(3*3) milk.", content);
     }
 
+    @Test
+    public void shouldSentenceWithOutChainParsingBeSuccessful() {
+        String expectedContent = "Dog eat a bone, cat 3*3+(3*3) milk.";
+        TextComponent actualText = sentenceParser.parseTextComponent(SENTENCE_CONTENT_EXAMPLE);
+        String actualContent = actualText.getContent();
+
+        Assert.assertEquals(expectedContent, actualContent);
+
+        ComponentType actualComponentType = actualText.getComponentType();
+
+        Assert.assertEquals(ComponentType.SENTENCE, actualComponentType);
+    }
 }

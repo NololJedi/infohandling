@@ -8,6 +8,7 @@ import by.epam.infohandling.text.parsers.LexemeParser;
 import by.epam.infohandling.text.parsers.ParagraphParser;
 import by.epam.infohandling.text.parsers.SentenceParser;
 import by.epam.infohandling.text.parsers.TextParser;
+import by.epam.infohandling.util.ComponentInjector;
 import by.epam.infohandling.util.TextFileReader;
 
 import java.util.List;
@@ -20,16 +21,22 @@ public class InfoHandlingProcessor {
 
         System.out.println(content);
 
+        LexemeParser lexemeParser = new LexemeParser();
+        SentenceParser sentenceParser = new SentenceParser();
+        ParagraphParser paragraphParser = new ParagraphParser();
+        sentenceParser.setNextParser(lexemeParser);
+        paragraphParser.setNextParser(sentenceParser);
 
         TextParser textParser = new TextParser();
-        textParser.setNextParser(new ParagraphParser());
+        textParser.setNextParser(paragraphParser);
 
         TextComposite text = (TextComposite) textParser.parseTextComponent(content);
-        List<TextComponent> components = text.getTextComponentsByType(ComponentType.PARAGRAPH);
+        List<TextComponent> components = ComponentInjector.getComponentsByType(text,ComponentType.WORD);
 
         for (TextComponent component : components) {
-            System.out.println("Paragraph : " + component.getContent());
+            System.out.println("M " + component.getContent());
         }
+
     }
 
 }

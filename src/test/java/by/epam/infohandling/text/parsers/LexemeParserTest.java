@@ -1,5 +1,6 @@
 package by.epam.infohandling.text.parsers;
 
+import by.epam.infohandling.text.composite.ComponentType;
 import by.epam.infohandling.text.composite.Lexeme;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -22,25 +23,25 @@ public class LexemeParserTest {
     public void shouldWordParsingBeSuccessful() {
         Lexeme actualWord = (Lexeme) lexemeParser.parseTextComponent(WORD_CONTENT_EXAMPLE);
 
-        checkLexeme(actualWord, LexemeType.WORD, "Dog");
+        checkLexeme(actualWord, ComponentType.WORD, "Dog");
     }
 
     @Test
     public void shouldArticleParsingBeSuccessful() {
         Lexeme article = (Lexeme) lexemeParser.parseTextComponent(ARTICLE_CONTENT_EXAMPLE);
 
-        checkLexeme(article, LexemeType.WORD, "a");
+        checkLexeme(article, ComponentType.ALPHABET_SYMBOL, "a");
     }
 
     @Test
     public void shouldMathExpressionParsingBeSuccessful() {
         Lexeme actualMathExpression = (Lexeme) lexemeParser.parseTextComponent(MATH_EXPRESSION_EXAMPLE);
 
-        checkLexeme(actualMathExpression, LexemeType.MATH_EXPRESSION, "3*3+(3*3)");
+        checkLexeme(actualMathExpression, ComponentType.MATH_EXPRESSION, "3*3+(3*3)");
     }
 
-    private void checkLexeme(Lexeme lexeme, LexemeType lexemeType, String content) {
-        LexemeType actualType = lexeme.getLexemeType();
+    private void checkLexeme(Lexeme lexeme, ComponentType lexemeType, String content) {
+        ComponentType actualType = lexeme.getComponentType();
         String actualContent = lexeme.getContent();
 
         Assert.assertEquals(lexemeType, actualType);

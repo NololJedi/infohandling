@@ -28,4 +28,35 @@ public class Lexeme extends TextComponent {
         return content;
     }
 
+    @Override
+    public List<TextComponent> getTextComponents() {
+        throw new UnsupportedOperationException("getTextComponents operation doesn't support in that class.");
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object){
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()){
+            return false;
+        }
+        if (!super.equals(object)) return false;
+        Lexeme lexeme = (Lexeme) object;
+
+        return Objects.equals(content, lexeme.content);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), content);
+    }
+
+    @Override
+    public String toString() {
+        return "Lexeme{" +
+                "content='" + content + '\'' +
+                '}';
+    }
 }

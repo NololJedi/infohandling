@@ -7,39 +7,6 @@ import java.util.Objects;
 public class TextComposite extends TextComponent {
 
     private List<TextComponent> textComponents = new ArrayList<TextComponent>();
-    private ComponentType componentType;
-
-    public List<TextComponent> getTextComponentsByType(ComponentType inputType) {
-        if (inputType == null) {
-            throw new IllegalArgumentException("Incorrect input component inputType.");
-        }
-
-        List<TextComponent> components = new ArrayList<>();
-        for (TextComponent currentComponent : textComponents) {
-            ComponentType currentComponentType = currentComponent.getComponentType();
-            if (currentComponentType == inputType) {
-                components.add(currentComponent);
-            }
-        }
-
-        if (components.size() != 0) {
-            return components;
-        } else {
-            throw new IllegalArgumentException("Such type components were not found.");
-        }
-    }
-
-    public void removeTextComponent(TextComponent textComponent) {
-        if (textComponent == null) {
-            throw new IllegalArgumentException("Incorrect input text component.");
-        }
-
-        if (this.textComponents.contains(textComponent)) {
-            this.textComponents.remove(textComponent);
-        } else {
-            throw new IllegalArgumentException("Text component doesn't exist in current list of components.");
-        }
-    }
 
     public void removeLastTextComponent(){
         if (textComponents.isEmpty()){
@@ -60,6 +27,7 @@ public class TextComposite extends TextComponent {
         this.textComponents.add(textComponent);
     }
 
+    @Override
     public List<TextComponent> getTextComponents() {
         return textComponents;
     }
@@ -80,34 +48,30 @@ public class TextComposite extends TextComponent {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) {
+        if (this == object){
             return true;
         }
-        if (object == null || getClass() != object.getClass()) {
+        if (object == null || getClass() != object.getClass()){
+            return false;
+        }
+        if (!super.equals(object)){
             return false;
         }
         TextComposite that = (TextComposite) object;
 
-        if (!textComponents.equals(that.textComponents)) {
-            return false;
-        }
-        if (componentType != that.componentType) {
-            return false;
-        }
-
-        return true;
+        return Objects.equals(textComponents, that.textComponents);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(textComponents, componentType);
+
+        return Objects.hash(super.hashCode(), textComponents);
     }
 
     @Override
     public String toString() {
         return "TextComposite{" +
                 "textComponents=" + textComponents +
-                ", componentType=" + componentType +
                 '}';
     }
 }

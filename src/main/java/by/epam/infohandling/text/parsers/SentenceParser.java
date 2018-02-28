@@ -1,9 +1,9 @@
 package by.epam.infohandling.text.parsers;
 
 import by.epam.infohandling.text.composite.*;
-import by.epam.infohandling.util.ContentMatcher;
+import by.epam.infohandling.util.ContentDeterminant;
 
-import static by.epam.infohandling.util.ContentMatcher.*;
+import static by.epam.infohandling.util.ContentDeterminant.*;
 
 public class SentenceParser extends Parser {
 
@@ -15,39 +15,52 @@ public class SentenceParser extends Parser {
             throw new IllegalArgumentException("Incorrect content.");
         }
 
-        TextComposite sentence = new TextComposite();
-        sentence.setComponentType(ComponentType.SENTENCE);
-        TextComponent space = new PunctuationSymbol(SPACE);
+        if (nextParser == null) {
+            Lexeme sentence = new Lexeme();
+            sentence.setContent(content);
+            sentence.setComponentType(ComponentType.SENTENCE);
 
-        String[] lexemes = content.split(SPACE);
+            return sentence;
+
+        } else {
+            TextComposite sentence = new TextComposite();
+            sentence.setComponentType(ComponentType.SENTENCE);
+            TextComponent space = new PunctuationSymbol(SPACE);
+
+            String[] lexemes = content.split(SPACE);
 
 
-        for (int arrayIndex = 0; arrayIndex < lexemes.length; arrayIndex++) {
-            String currentContent = lexemes[arrayIndex];
+            for (int arrayIndex = 0; arrayIndex < lexemes.length; arrayIndex++) {
+                String currentContent = lexemes[arrayIndex];
 
-            int lastSymbolIdentifier = currentContent.length() - 1;
-            char lastChar = currentContent.charAt(lastSymbolIdentifier);
-            String lastSymbol = String.valueOf(lastChar);
+                int lastSymbolIdentifier = currentContent.length() - 1;
+                char lastChar = currentContent.charAt(lastSymbolIdentifier);
+                String lastSymbol = String.valueOf(lastChar);
 
-            boolean isLastSymbolPunctuation = ContentMatcher.contentMatch(lastSymbol, PUNCTUATION_PATTERN);
-            if (isLastSymbolPunctuation) {
-                currentContent = currentContent.replace(lastSymbol, EMPTY_SYMBOL);
+                boolean isLastSymbolPunctuation = ContentDeterminant.matchContent(lastSymbol, PUNCTUATION_PATTERN);
+                if (isLastSymbolPunctuation) {
 
-                TextComponent word = nextParser.parseTextComponent(currentContent);
-                sentence.addTextComponent(word);
+                    if (currentContent.length() == SYMBOL_LENGTH){
+                        TextComponent punctuationSymbol = new PunctuationSymbol(lastSymbol);
+                        sentence.addTextComponent(punctuationSymbol);
+                    } else {
+                        currentContent = currentContent.replace(lastSymbol, EMPTY_SYMBOL);
 
-                TextComponent punctuationSymbol = new PunctuationSymbol(lastSymbol);
-                sentence.addTextComponent(punctuationSymbol);
-            } else {
-                TextComponent currentComponent = nextParser.parseTextComponent(currentContent);
-                sentence.addTextComponent(currentComponent);
+                        TextComponent word = nextParser.parseTextComponent(currentContent);
+                        sentence.addTextComponent(word);
+                    }
+
+                } else {
+                    TextComponent currentComponent = nextParser.parseTextComponent(currentContent);
+                    sentence.addTextComponent(currentComponent);
+                }
+                if (arrayIndex != lexemes.length - LAST_ELEMENT_IDENTIFIER) {
+                    sentence.addTextComponent(space);
+                }
             }
-            if (arrayIndex != lexemes.length - LAST_ELEMENT_IDENTIFIER) {
-                sentence.addTextComponent(space);
-            }
+
+            return sentence;
         }
-
-        return sentence;
     }
 
 }

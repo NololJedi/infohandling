@@ -1,5 +1,8 @@
 package by.epam.infohandling.text.parsers;
 
+import by.epam.infohandling.text.composite.ComponentType;
+import by.epam.infohandling.text.composite.Lexeme;
+import by.epam.infohandling.text.composite.TextComponent;
 import by.epam.infohandling.text.composite.TextComposite;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -27,19 +30,22 @@ public class TextParserTest {
 
     @BeforeClass
     public static void setTestingObjects() {
-        firstParagraph = mock(TextComposite.class);
-        when(firstParagraph.getContent()).thenReturn("Dog eat a bone. Cat lick milk. Dog eat milk cat. Cat lick a bone.");
+        firstParagraph = new TextComposite();
+        firstParagraph.addTextComponent(
+                new Lexeme("Dog eat a bone. Cat lick milk. Dog eat milk cat. Cat lick a bone.", ComponentType.PARAGRAPH));
 
-        secondParagraph = mock(TextComposite.class);
-        when(secondParagraph.getContent()).thenReturn("Cat eat a bone. Cat lick milk. Dog eat milk cat. Cat lick a bone.");
+        secondParagraph = new TextComposite();
+        secondParagraph.addTextComponent(
+                new Lexeme("Cat eat a bone. Cat lick milk. Dog eat milk cat. Cat lick a bone.", ComponentType.PARAGRAPH));
 
-        thirdParagraph = mock(TextComposite.class);
-        when(thirdParagraph.getContent()).thenReturn("Bird eat a bone. Cat lick milk. Dog eat milk cat. Cat lick a bone.");
+        thirdParagraph = new TextComposite();
+        thirdParagraph.addTextComponent(
+                new Lexeme("Bird eat a bone. Cat lick milk. Dog eat milk cat. Cat lick a bone.", ComponentType.PARAGRAPH));
 
     }
 
     @Test
-    public void shouldTextParsingBeSuccessful() {
+    public void shouldTextChainParsingBeSuccessful() {
         ParagraphParser paragraphParser = mock(ParagraphParser.class);
         when(paragraphParser.parseTextComponent("Dog eat a bone. Cat lick milk. Dog eat milk cat. Cat lick a bone."))
                 .thenReturn(firstParagraph);
@@ -57,4 +63,17 @@ public class TextParserTest {
                 "\tBird eat a bone. Cat lick milk. Dog eat milk cat. Cat lick a bone.", actualContent);
     }
 
+    @Test
+    public void shouldTextWithOutChainParsingBeSuccessful() {
+        TextComponent text = textParser.parseTextComponent(TEXT_CONTENT_EXAMPLE);
+        String actualContent = text.getContent();
+
+        Assert.assertEquals("\tDog eat a bone. Cat lick milk. Dog eat milk cat. Cat lick a bone.\n" +
+                "\tCat eat a bone. Cat lick milk. Dog eat milk cat. Cat lick a bone.\n" +
+                "\tBird eat a bone. Cat lick milk. Dog eat milk cat. Cat lick a bone.", actualContent);
+
+        ComponentType actualType = text.getComponentType();
+
+        Assert.assertEquals(ComponentType.TEXT, actualType);
+    }
 }

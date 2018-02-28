@@ -1,6 +1,7 @@
 package by.epam.infohandling;
 
-import by.epam.infohandling.util.ContentMatcher;
+import by.epam.infohandling.text.composite.ComponentType;
+import by.epam.infohandling.util.ContentDeterminant;
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
@@ -8,50 +9,41 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static by.epam.infohandling.util.ContentMatcher.*;
+import static by.epam.infohandling.text.composite.ComponentType.*;
+import static by.epam.infohandling.util.ContentDeterminant.*;
 
 @RunWith(DataProviderRunner.class)
-public class ContentMatcherTest {
+public class ContentDeterminantTest {
 
     @DataProvider
     public static Object[][] correctValues() {
         String letter = "a";
         String number = "2";
-        String math = "*";
         String punctuation = ".";
         String word = "correct";
-        String wordAndDot = "correct.";
         String mathExpression = "6+9*(3-4)";
 
         return new Object[][]{
                 {letter, ALPHABET_PATTERN, true},
                 {number, NUMBER_PATTERN, true},
-                {math, MATH_PATTERN, true},
                 {punctuation, PUNCTUATION_PATTERN, true},
                 {word, WORD_PATTERN, true},
-                {mathExpression, WORD_PATTERN, false},
-                {wordAndDot, WORD_PATTERN, true}
+                {mathExpression, MATH_PATTERN, true},
         };
     }
 
     @DataProvider
-    public static Object[][] incorrectValues() {
-        String letter = "2";
-        String number = ",";
-        String math = "s";
-        String punctuation = "/";
-        String mathExpression = "correct";
-        String word = "6+9*(3-4)";
-        String wordAndDot = "correct.asd";
+    public static Object[][] correctTypes() {
+        String letter = "a";
+        String number = "2";
+        String word = "correct";
+        String mathExpression = "6+9*(3-4)";
 
         return new Object[][]{
-                {letter, ALPHABET_PATTERN, true},
-                {number, ALPHABET_PATTERN, true},
-                {math, MATH_PATTERN, true},
-                {punctuation, PUNCTUATION_PATTERN, true},
-                {word, WORD_PATTERN, true},
-                {mathExpression, WORD_PATTERN, false},
-                {wordAndDot, WORD_PATTERN, true}
+                {letter, ALPHABET_SYMBOL},
+                {number, NUMBER},
+                {word, WORD},
+                {mathExpression, MATH_EXPRESSION}
         };
     }
 
@@ -75,22 +67,22 @@ public class ContentMatcherTest {
     @Test
     @UseDataProvider("correctValues")
     public void shouldMatchingBeSuccessful(String content, String pattern, boolean expectedResult) {
-        boolean actualResult = ContentMatcher.contentMatch(content, pattern);
+        boolean actualResult = ContentDeterminant.matchContent(content, pattern);
 
         Assert.assertEquals(expectedResult, actualResult);
     }
 
     @Test
-    @UseDataProvider("incorrectValues")
-    public void shouldMatchingFailed(String content, String pattern, boolean expectedResult) {
-        boolean actualResult = ContentMatcher.contentMatch(content, pattern);
+    @UseDataProvider("correctTypes")
+    public void shouldTypeDeterminantBeSuccessful(String content, ComponentType expectedType) {
+        ComponentType actualType = ContentDeterminant.determinantType(content);
 
-        Assert.assertNotEquals(expectedResult, actualResult);
+        Assert.assertEquals(actualType, expectedType);
     }
 
     @Test(expected = IllegalArgumentException.class)
     @UseDataProvider("exceptionValues")
     public void shouldMatchingCauseIllegalArgumentException(String content, String pattern) {
-        ContentMatcher.contentMatch(content, pattern);
+        ContentDeterminant.matchContent(content, pattern);
     }
 }
