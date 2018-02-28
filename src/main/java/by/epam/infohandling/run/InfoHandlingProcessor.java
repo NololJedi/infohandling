@@ -12,6 +12,7 @@ import by.epam.infohandling.util.ComponentExtractor;
 import by.epam.infohandling.util.TextFileReader;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InfoHandlingProcessor {
@@ -37,6 +38,13 @@ public class InfoHandlingProcessor {
 
        new SentencesWithSameWordsCalculator().startTask(text);
        new LexemesCount().startTask(text);
+
+       List<String> words = new ArrayList<>();
+       words.add("will");
+       words.add("was");
+       words.add("it");
+
+       new WordsOccurrencesCalculator().startTask(text,words);
 
 
     }
