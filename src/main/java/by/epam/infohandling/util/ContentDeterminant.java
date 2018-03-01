@@ -31,7 +31,7 @@ public class ContentDeterminant {
         MATCH_MAP.put(MATH_PATTERN, ComponentType.MATH_EXPRESSION);
     }
 
-    public static boolean matchContent(String content, String pattern) {
+    public static boolean determinantContent(String content, String pattern) {
         if (content == null || content.isEmpty()) {
             throw new IllegalArgumentException("Incorrect content was detected.");
         }
@@ -51,7 +51,7 @@ public class ContentDeterminant {
 
         for (Map.Entry<String, ComponentType> currentType : mapToSet) {
             String pattern = currentType.getKey();
-            boolean isTypeDetected = matchContent(content, pattern);
+            boolean isTypeDetected = determinantContent(content, pattern);
 
             if (isTypeDetected) {
                 type = currentType.getValue();

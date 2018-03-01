@@ -67,7 +67,7 @@ public class ContentDeterminantTest {
     @Test
     @UseDataProvider("correctValues")
     public void shouldMatchingBeSuccessful(String content, String pattern, boolean expectedResult) {
-        boolean actualResult = ContentDeterminant.matchContent(content, pattern);
+        boolean actualResult = ContentDeterminant.determinantContent(content, pattern);
 
         Assert.assertEquals(expectedResult, actualResult);
     }
@@ -83,6 +83,6 @@ public class ContentDeterminantTest {
     @Test(expected = IllegalArgumentException.class)
     @UseDataProvider("exceptionValues")
     public void shouldMatchingCauseIllegalArgumentException(String content, String pattern) {
-        ContentDeterminant.matchContent(content, pattern);
+        ContentDeterminant.determinantContent(content, pattern);
     }
 }

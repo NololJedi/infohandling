@@ -30,7 +30,8 @@ public class ComponentExtractor {
 
     private static boolean isObjectComposite(TextComponent textComponent) {
         Class currentClass = textComponent.getClass();
+        Class compositeClass = TextComposite.class;
 
-        return TextComposite.class.equals(currentClass);
+        return compositeClass.equals(currentClass);
     }
 }

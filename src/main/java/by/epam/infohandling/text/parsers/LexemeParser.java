@@ -12,7 +12,7 @@ public class LexemeParser extends Parser {
 
     @Override
     public void setNextParser(Parser nextParser) {
-        throw new IllegalArgumentException("Final parser of chain. Operation not supported.");
+        throw new IllegalArgumentException("Final parser of chain. Operation isn't supported.");
     }
 
     @Override
@@ -22,7 +22,7 @@ public class LexemeParser extends Parser {
         }
 
         if (content.length() == SYMBOL_LENGTH) {
-            boolean isContentPunctuation = ContentDeterminant.matchContent(content,PUNCTUATION_PATTERN);
+            boolean isContentPunctuation = ContentDeterminant.determinantContent(content,PUNCTUATION_PATTERN);
             if (isContentPunctuation){
                 PunctuationSymbol punctuationSymbol = new PunctuationSymbol(content);
 
