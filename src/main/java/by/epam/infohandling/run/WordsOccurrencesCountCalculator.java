@@ -9,16 +9,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WordsOccurrencesCalculator {
+public class WordsOccurrencesCountCalculator {
 
-    private static final Logger LOGGER = Logger.getLogger(WordsOccurrencesCalculator.class);
+    private static final Logger LOGGER = Logger.getLogger(WordsOccurrencesCountCalculator.class);
     private static Map<String, Integer> wordsOccurrences = new HashMap<>();
 
-    public void startTask(TextComponent text, List<String> words){
+    public void startTask(TextComponent text, List<String> words) {
         if (text == null) {
             throw new IllegalArgumentException("Incorrect text detected.");
         }
-        if (words == null || words.isEmpty()){
+        if (words == null || words.isEmpty()) {
             throw new IllegalArgumentException("Incorrect words detected.");
         }
 
@@ -26,7 +26,7 @@ public class WordsOccurrencesCalculator {
         List<TextComponent> wordsFromText = ComponentExtractor.extractComponents(text, ComponentType.WORD);
 
         for (String word : words) {
-            calculateWordOccurrences(word,wordsFromText);
+            calculateWordOccurrences(word, wordsFromText);
         }
 
         wordsOccurrences.entrySet().stream()
@@ -34,18 +34,18 @@ public class WordsOccurrencesCalculator {
                 .forEach(LOGGER::info);
     }
 
-    private void calculateWordOccurrences(String word, List<TextComponent> wordsFromText){
+    private void calculateWordOccurrences(String word, List<TextComponent> wordsFromText) {
         int countOfOccurrences = 0;
 
         for (TextComponent wordFromText : wordsFromText) {
             String currentContent = wordFromText.getContent();
 
-            if (word.equalsIgnoreCase(currentContent)){
+            if (word.equalsIgnoreCase(currentContent)) {
                 countOfOccurrences++;
             }
         }
 
-        wordsOccurrences.put(word,countOfOccurrences);
+        wordsOccurrences.put(word, countOfOccurrences);
     }
 
 }

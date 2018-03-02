@@ -1,9 +1,5 @@
 package by.epam.infohandling.text.composite;
 
-import by.epam.infohandling.text.composite.ComponentType;
-import by.epam.infohandling.text.composite.TextComponent;
-import by.epam.infohandling.text.composite.TextComposite;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +10,7 @@ public class Lexeme extends TextComponent {
     public Lexeme() {
     }
 
-    public Lexeme(String content, ComponentType componentType){
+    public Lexeme(String content, ComponentType componentType) {
         this.content = content;
         this.componentType = componentType;
     }
@@ -35,10 +31,10 @@ public class Lexeme extends TextComponent {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object){
+        if (this == object) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()){
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
         if (!super.equals(object)) return false;

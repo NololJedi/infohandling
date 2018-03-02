@@ -15,16 +15,18 @@ public abstract class TextComponent {
         this.componentType = componentType;
     }
 
+    public abstract void setContent(String content);
+
     public abstract String getContent();
 
     public abstract List<TextComponent> getTextComponents();
 
     @Override
     public boolean equals(Object object) {
-        if (this == object){
+        if (this == object) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()){
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
         TextComponent component = (TextComponent) object;

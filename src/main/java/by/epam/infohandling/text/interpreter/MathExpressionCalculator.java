@@ -1,8 +1,17 @@
 package by.epam.infohandling.text.interpreter;
 
+import by.epam.infohandling.text.composite.ComponentType;
+import by.epam.infohandling.text.composite.TextComponent;
 import by.epam.infohandling.text.interpreter.expressions.*;
+import by.epam.infohandling.util.ComponentExtractor;
+import by.epam.infohandling.util.ContentDeterminant;
+import org.apache.log4j.Logger;
+
+import java.util.List;
 
 public class MathExpressionCalculator {
+
+    private static final Logger LOGGER = Logger.getLogger(MathExpressionCalculator.class);
 
     private static final char MINUS_OPERATOR = '-';
     private static final char PLUS_OPERATOR = '+';
@@ -12,29 +21,59 @@ public class MathExpressionCalculator {
     private static final char CLOSED_BRACKET = ')';
 
     private static final int NEXT_ELEMENT_IDENTIFIER = 1;
-    private static final int LAST_ELEMENT_IDENTIFIER = -1;
+    private static final int NONE_ELEMENT_IDENTIFIER = -1;
     private static final int FIRST_ELEMENT_INDEX = 0;
 
-    public int calculateExpression(String mathExpressionContent, int i, int j){
+    public void calculateExpressions(TextComponent text, int i, int j) {
+        if (text == null) {
+            throw new IllegalArgumentException("Incorrect text detected.");
+        }
+        LOGGER.info("Start task - Calculate mathematical expressions in the text.");
+
+        List<TextComponent> expressions = ComponentExtractor.extractComponents(text, ComponentType.MATH_EXPRESSION);
+
+        for (TextComponent expression : expressions) {
+            String currentContent = expression.getContent();
+            LOGGER.info(String.format("Current expression: %s.", currentContent));
+
+            String resultOfCalculating = calculateExpression(currentContent, i, j);
+            LOGGER.info(String.format("Result of calculating: %s.", resultOfCalculating));
+
+            expression.setContent(resultOfCalculating);
+        }
+
+    }
+
+    private String calculateExpression(String mathExpressionContent, int i, int j) {
         String iNumber = String.valueOf(i);
         String jNumber = String.valueOf(j);
 
-        mathExpressionContent = mathExpressionContent.replace("i", iNumber);
-        mathExpressionContent = mathExpressionContent.replace("j", jNumber);
+        boolean isExpressionHasLiteralI = ContentDeterminant
+                .determinantContent(mathExpressionContent, ContentDeterminant.MATH_EXPRESSION_WITH_LITERAL_I_PATTERN);
+        if (isExpressionHasLiteralI) {
+            mathExpressionContent = mathExpressionContent.replace("i", iNumber);
+        }
+
+        boolean isExpressionHasLiteralJ = ContentDeterminant
+                .determinantContent(mathExpressionContent, ContentDeterminant.MATH_EXPRESSION_WITH_LITERAL_J_PATTERN);
+        if (isExpressionHasLiteralJ) {
+            mathExpressionContent = mathExpressionContent.replace("j", jNumber);
+        }
+
 
         Expression number = calculate(mathExpressionContent);
         int result = number.interpret();
 
-        return result;
+        return String.valueOf(result);
     }
 
     private Expression calculate(String mathExpressionContent) {
         int openBracketIndex = mathExpressionContent.indexOf(OPEN_BRACKET);
-        if (openBracketIndex != LAST_ELEMENT_IDENTIFIER) {
+        if (openBracketIndex != NONE_ELEMENT_IDENTIFIER) {
             mathExpressionContent = subMathExpressionCalculating(openBracketIndex, mathExpressionContent);
         }
 
-        int currentPosition = mathExpressionContent.length() + LAST_ELEMENT_IDENTIFIER;
+        int currentPosition = mathExpressionContent.length() - NEXT_ELEMENT_IDENTIFIER;
 
         while (currentPosition > FIRST_ELEMENT_INDEX) {
             char currentCharacter = mathExpressionContent.charAt(currentPosition);

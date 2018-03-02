@@ -16,7 +16,7 @@ public class ParagraphParser extends Parser {
             throw new IllegalArgumentException("Incorrect content.");
         }
 
-        if (nextParser == null){
+        if (nextParser == null) {
             Lexeme paragraph = new Lexeme();
             paragraph.setContent(content);
             paragraph.setComponentType(ComponentType.PARAGRAPH);

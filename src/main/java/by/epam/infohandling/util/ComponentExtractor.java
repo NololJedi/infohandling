@@ -12,19 +12,18 @@ public class ComponentExtractor {
     public static List<TextComponent> extractComponents(TextComponent textComponent, ComponentType componentType) {
         List<TextComponent> components = new ArrayList<>();
 
-        List<TextComponent> currentComponents = textComponent.getTextComponents();
-        for (TextComponent currentComponent : currentComponents) {
-            ComponentType currentType = currentComponent.getComponentType();
-            if (componentType.equals(currentType)) {
-                components.add(currentComponent);
-            } else {
-                boolean isElementComposite = isObjectComposite(currentComponent);
-                if (isElementComposite) {
+        boolean isElementComposite = isObjectComposite(textComponent);
+        if (isElementComposite) {
+            List<TextComponent> currentComponents = textComponent.getTextComponents();
+            for (TextComponent currentComponent : currentComponents) {
+                ComponentType currentType = currentComponent.getComponentType();
+                if (componentType.equals(currentType)) {
+                    components.add(currentComponent);
+                } else {
                     components.addAll(extractComponents(currentComponent, componentType));
                 }
             }
         }
-
         return components;
     }
 

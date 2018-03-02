@@ -1,12 +1,13 @@
 package by.epam.infohandling.text.parsers;
 
 import by.epam.infohandling.text.composite.ComponentType;
+import by.epam.infohandling.text.composite.Lexeme;
 import by.epam.infohandling.text.composite.PunctuationSymbol;
 import by.epam.infohandling.text.composite.TextComponent;
-import by.epam.infohandling.text.composite.Lexeme;
 import by.epam.infohandling.util.ContentDeterminant;
 
-import static by.epam.infohandling.util.ContentDeterminant.*;
+import static by.epam.infohandling.util.ContentDeterminant.PUNCTUATION_PATTERN;
+import static by.epam.infohandling.util.ContentDeterminant.SYMBOL_LENGTH;
 
 public class LexemeParser extends Parser {
 
@@ -22,8 +23,8 @@ public class LexemeParser extends Parser {
         }
 
         if (content.length() == SYMBOL_LENGTH) {
-            boolean isContentPunctuation = ContentDeterminant.determinantContent(content,PUNCTUATION_PATTERN);
-            if (isContentPunctuation){
+            boolean isContentPunctuation = ContentDeterminant.determinantContent(content, PUNCTUATION_PATTERN);
+            if (isContentPunctuation) {
                 PunctuationSymbol punctuationSymbol = new PunctuationSymbol(content);
 
                 return punctuationSymbol;

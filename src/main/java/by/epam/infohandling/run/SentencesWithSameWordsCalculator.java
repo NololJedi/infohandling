@@ -12,11 +12,11 @@ public class SentencesWithSameWordsCalculator {
     private static final Logger LOGGER = Logger.getLogger(SentencesWithSameWordsCalculator.class);
 
     public void startTask(TextComponent text) {
-        if (text == null){
+        if (text == null) {
             throw new IllegalArgumentException("Incorrect text detected.");
         }
 
-        LOGGER.info("Start run - Calculate count of sentences with same words.");
+        LOGGER.info("Start task - Calculate count of sentences with same words.");
 
         List<TextComponent> sentences = ComponentExtractor.extractComponents(text, ComponentType.SENTENCE);
         int currentCountOfSentences = sentences.size();
@@ -28,7 +28,7 @@ public class SentencesWithSameWordsCalculator {
             LOGGER.info(String.format("Checking sentence - %s", sentence.getContent()));
 
             boolean isSentenceValid = isSentenceWithSameWords(sentence);
-            if (isSentenceValid){
+            if (isSentenceValid) {
                 LOGGER.info("Sentence has same words.");
                 countOfSentencesWithSameWords++;
             } else {
@@ -36,7 +36,7 @@ public class SentencesWithSameWordsCalculator {
             }
         }
 
-        if (countOfSentencesWithSameWords == 0){
+        if (countOfSentencesWithSameWords == 0) {
             LOGGER.info("No sentences were found.");
         } else {
             String line = countOfSentencesWithSameWords == 1 ? "sentence" : "sentences";
@@ -44,15 +44,15 @@ public class SentencesWithSameWordsCalculator {
         }
     }
 
-    private boolean isSentenceWithSameWords(TextComponent sentence){
+    private boolean isSentenceWithSameWords(TextComponent sentence) {
         List<TextComponent> words = ComponentExtractor.extractComponents(sentence, ComponentType.WORD);
 
-        for (int listIndex = 0; listIndex < words.size()-1; listIndex++) {
+        for (int listIndex = 0; listIndex < words.size() - 1; listIndex++) {
             TextComponent word = words.get(listIndex);
 
-            for (int innerListIndex = listIndex+1; innerListIndex < words.size(); innerListIndex++) {
+            for (int innerListIndex = listIndex + 1; innerListIndex < words.size(); innerListIndex++) {
                 TextComponent currentWord = words.get(innerListIndex);
-                if (word.equals(currentWord)){
+                if (word.equals(currentWord)) {
                     return true;
                 }
             }

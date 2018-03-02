@@ -22,6 +22,9 @@ public class ContentDeterminant {
     public static final String SENTENCE_PATTERN = "[\\p{Upper}+\\-(](.(?!\\.))*..";
     public static final String PARAGRAPH_PATTERN = "\\t?[\\p{Upper}+\\-(](.(?!\\r?\\n\\r?\\n))*.";
 
+    public static final String MATH_EXPRESSION_WITH_LITERAL_I_PATTERN = ".*i{1}.*";
+    public static final String MATH_EXPRESSION_WITH_LITERAL_J_PATTERN = ".*j{1}.*";
+
     private static final Map<String, ComponentType> MATCH_MAP = new HashMap<>();
 
     static {

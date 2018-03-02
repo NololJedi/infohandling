@@ -18,6 +18,11 @@ public class PunctuationSymbol extends TextComponent {
     }
 
     @Override
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
     public String getContent() {
         return content;
     }
@@ -29,13 +34,13 @@ public class PunctuationSymbol extends TextComponent {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object){
+        if (this == object) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()){
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        if (!super.equals(object)){
+        if (!super.equals(object)) {
             return false;
         }
         PunctuationSymbol that = (PunctuationSymbol) object;

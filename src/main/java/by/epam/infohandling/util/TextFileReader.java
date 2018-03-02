@@ -2,7 +2,6 @@ package by.epam.infohandling.util;
 
 import by.epam.infohandling.exceptions.IncorrectFileException;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -16,12 +15,12 @@ public class TextFileReader {
             StringBuilder text = new StringBuilder();
 
             while (fileReader.ready()) {
-                char symbol = (char)fileReader.read();
+                char symbol = (char) fileReader.read();
                 text.append(symbol);
             }
 
             String result = text.toString();
-            result = result.replaceAll("\r","");
+            result = result.replaceAll("\r", "");
             return result;
         } catch (IOException exception) {
             throw new IncorrectFileException("Incorrect file.", exception);

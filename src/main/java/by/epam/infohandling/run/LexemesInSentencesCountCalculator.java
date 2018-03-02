@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LexemesCount {
+public class LexemesInSentencesCountCalculator {
 
-    private static Logger LOGGER = Logger.getLogger(LexemesCount.class);
+    private static Logger LOGGER = Logger.getLogger(LexemesInSentencesCountCalculator.class);
     private static Map<String, Integer> calculatedSentences = new HashMap<>();
 
     public void startTask(TextComponent text) {
